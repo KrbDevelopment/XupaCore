@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    // Scripts
+    .js('resources/js/app.js', 'public/js')
+
+    // Styles
+    .sass('resources/sass/app.scss', 'public/css')
+    .postCss('resources/css/app.css', 'public/css', [
+        require('tailwindcss')
+    ])
+
+    // General Config
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+
+    // ESLint
+    .webpackConfig({
+        plugins: [new ESLintPlugin()]
+    })
+;

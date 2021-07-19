@@ -11,5 +11,5 @@ createInertiaApp({
         createApp({ render: () => h(app, props) })
             .use(plugin)
             .mount(el)
-    },
+    }
 })

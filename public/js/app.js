@@ -18839,10 +18839,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14 ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0 ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23270,6 +23270,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/nprogress/nprogress.js":
 /*!*********************************************!*\
   !*** ./node_modules/nprogress/nprogress.js ***!
@@ -24563,10 +24576,10 @@ module.exports = function getSideChannel() {
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/HelloWorld.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/pages/HelloWorld.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/pages/Test.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/pages/Test.vue ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24574,31 +24587,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _HelloWorld_vue_vue_type_template_id_e62edc14__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=e62edc14 */ "./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14");
+/* harmony import */ var _Test_vue_vue_type_template_id_f86a43b0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Test.vue?vue&type=template&id=f86a43b0 */ "./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0");
 
 const script = {}
-script.render = _HelloWorld_vue_vue_type_template_id_e62edc14__WEBPACK_IMPORTED_MODULE_0__.render
+script.render = _Test_vue_vue_type_template_id_f86a43b0__WEBPACK_IMPORTED_MODULE_0__.render
 /* hot reload */
 if (false) {}
 
-script.__file = "resources/js/components/pages/HelloWorld.vue"
+script.__file = "resources/js/components/pages/Test.vue"
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14 ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0 ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HelloWorld_vue_vue_type_template_id_e62edc14__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Test_vue_vue_type_template_id_f86a43b0__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HelloWorld_vue_vue_type_template_id_e62edc14__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HelloWorld.vue?vue&type=template&id=e62edc14 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/HelloWorld.vue?vue&type=template&id=e62edc14");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Test_vue_vue_type_template_id_f86a43b0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Test.vue?vue&type=template&id=f86a43b0 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/pages/Test.vue?vue&type=template&id=f86a43b0");
 
 
 /***/ }),
@@ -24819,8 +24832,8 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./HelloWorld": "./resources/js/components/pages/HelloWorld.vue",
-	"./HelloWorld.vue": "./resources/js/components/pages/HelloWorld.vue"
+	"./Test": "./resources/js/components/pages/Test.vue",
+	"./Test.vue": "./resources/js/components/pages/Test.vue"
 };
 
 
@@ -25027,7 +25040,8 @@ webpackContext.id = "./resources/js/components/pages sync recursive ^\\.\\/.*$";
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
