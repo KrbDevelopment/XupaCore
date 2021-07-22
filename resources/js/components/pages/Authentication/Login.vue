@@ -182,17 +182,14 @@ export default {
                 // Post Content
                 email: this.email,
                 password: this.password,
-                remember_me: this.remember_me
+                remember_me: this.remember_me,
+
+                // CSRF Token
+                _token: this.$page.props.csrf_token
             }, {
                 // Server Response Handler
 
                 preserveScroll: true, // Keep scrolling position (freeze position)
-
-                /**
-                 * Successful server response [HTTP Code: 2xx]
-                 * @param response [Object] Server response containing props, etc.
-                 */
-                onSuccess: (response) => {},
 
                 /**
                  * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
