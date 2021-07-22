@@ -1,6 +1,7 @@
 <template>
     <div class="relative min-h-screen flex ">
         <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
+            <!-- Left Page Half -->
             <div class="relative sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"
                  style="background-image: url(https://images.unsplash.com/photo-1579451861283-a2239070aaa9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80);">
                 <div class="absolute bg-xupa-darkest opacity-75 inset-0 z-0"></div>
@@ -13,6 +14,9 @@
                     </div>
                 </div>
             </div>
+            <!-- END: Left Page Half -->
+
+            <!-- Right Page Half -->
             <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-1/2 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
                 <div class="max-w-md w-full space-y-8">
                     <div class="text-center">
@@ -21,6 +25,8 @@
                         </h2>
                         <p class="mt-2 text-sm text-gray-500">Please sign in to your account</p>
                     </div>
+
+                    <!-- Social Login Anchors -->
                     <div class="flex flex-row justify-center items-center space-x-3">
                         <a href="https://www.behance.net/ajeeshmon" target="_blank"
                            class="w-11 h-11 items-center justify-center inline-flex rounded-2xl font-bold text-lg text-white bg-xupa hover:shadow-lg cursor-pointer transition ease-in duration-300"><img
@@ -35,24 +41,29 @@
                             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yMy45OTQgMjR2LS4wMDFoLjAwNnYtOC44MDJjMC00LjMwNi0uOTI3LTcuNjIzLTUuOTYxLTcuNjIzLTIuNDIgMC00LjA0NCAxLjMyOC00LjcwNyAyLjU4N2gtLjA3di0yLjE4NWgtNC43NzN2MTYuMDIzaDQuOTd2LTcuOTM0YzAtMi4wODkuMzk2LTQuMTA5IDIuOTgzLTQuMTA5IDIuNTQ5IDAgMi41ODcgMi4zODQgMi41ODcgNC4yNDN2Ny44MDF6IiBmaWxsPSIjZmZmZmZmIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtLjM5NiA3Ljk3N2g0Ljk3NnYxNi4wMjNoLTQuOTc2eiIgZmlsbD0iI2ZmZmZmZiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTIuODgyIDBjLTEuNTkxIDAtMi44ODIgMS4yOTEtMi44ODIgMi44ODJzMS4yOTEgMi45MDkgMi44ODIgMi45MDkgMi44ODItMS4zMTggMi44ODItMi45MDljLS4wMDEtMS41OTEtMS4yOTItMi44ODItMi44ODItMi44ODJ6IiBmaWxsPSIjZmZmZmZmIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIj48L3BhdGg+PC9nPjwvc3ZnPg=="
                             class="w-4 h-4"></a>
                     </div>
+                    <!-- END: Social Login Anchors -->
+
                     <div class="flex items-center justify-center space-x-2">
                         <span class="h-px w-16 bg-gray-200"></span>
                         <span class="text-gray-300 font-normal">or continue with</span>
                         <span class="h-px w-16 bg-gray-200"></span>
                     </div>
-                    <form class="mt-8 space-y-6" action="#" method="POST">
-                        <input type="hidden" name="remember" value="true">
+                    <form class="mt-8 space-y-6" @submit.prevent="performLoginAttempt">
+                        <!-- Email field -->
                         <div class="relative">
                             <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Email</label>
                             <div class="relative mt-1">
                                 <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
-                                       type="text" placeholder="mail@gmail.com" value="mail@gmail.com">
+                                       type="text" placeholder="mail@gmail.com" value="mail@gmail.com" v-model="email">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <XCircleIcon class="h-6 w-6 text-red-600" />
                                 </div>
                             </div>
                         </div>
+                        <!-- END: Email field -->
+
+                        <!-- Password field -->
                         <div class="mt-8 content-center">
                             <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
                                 Password
@@ -60,27 +71,38 @@
                             <div class="relative mt-1">
                                 <input
                                     class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
-                                    type="password" placeholder="Enter your password">
+                                    type="password" placeholder="Enter your password" v-model="password">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <XCircleIcon class="h-6 w-6 text-red-600" />
                                 </div>
                             </div>
                         </div>
+                        <!-- END: Password field -->
+
+                        <!-- Remember me & Forgot password -->
                         <div class="flex items-center justify-between">
+                            <!-- Remember me field -->
                             <div class="flex items-center">
-                                <input id="remember_me" name="remember_me" type="checkbox"
+                                <input id="remember_me" name="remember_me" type="checkbox" v-model="remember_me"
                                        class="focus:ring-xupa h-4 w-4 text-xupa-dark border-gray-300 rounded">
                                 <label for="remember_me" class="ml-2 block text-sm text-gray-900">
                                     Remember me
                                 </label>
                             </div>
+                            <!-- END: Remember me field -->
+
+                            <!-- Forgot Password Anchor -->
                             <div class="text-sm">
                                 <a href="#" class="font-medium text-xupa hover:textxupa-dark">
                                     Forgot your password?
                                 </a>
                             </div>
+                            <!-- END: Forgot Password Anchor -->
                         </div>
+                        <!-- END: Remember me & Forgot password -->
+
+                        <!-- Action Buttons -->
                         <div class="mt-2">
                             <button type="submit"
                                     class="w-full flex justify-center bg-xupa text-gray-100 p-4 rounded-full tracking-wide font-semibold focus:outline-none focus:shadow-outline hover:bg-xupa-dark shadow-lg cursor-pointer transition ease-in duration-300">
@@ -90,35 +112,35 @@
                         <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
                             <span>Don't have an account?</span>
                             <a href="#"
-                               class="text-xupa hover:text-xupa-dark no-underline hover:underline cursor-pointer transition ease-in duration-300">Sign
-                                up</a>
+                               class="text-xupa hover:text-xupa-dark no-underline hover:underline cursor-pointer transition ease-in duration-300">
+                                Sign up
+                            </a>
                         </p>
+                        <!-- END: Action Buttons -->
                     </form>
 
-                    <div class="rounded-md bg-red-50 p-4 mt-4">
+                    <div class="rounded-md bg-red-50 p-4 mt-4" v-if="validationError">
+                        <!-- Error Section -->
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <XCircleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
                             </div>
                             <div class="ml-3">
                                 <h3 class="text-sm font-medium text-red-800">
-                                    There were 2 errors with your submission
+                                    There were {{ validationError ? Object.keys(validationError)?.length : 0 }} errors with your submission
                                 </h3>
                                 <div class="mt-2 text-sm text-red-700">
                                     <ul class="list-disc pl-5 space-y-1">
-                                        <li>
-                                            Your password must be at least 8 characters
-                                        </li>
-                                        <li>
-                                            Your password must include at least one pro wrestling finishing move
-                                        </li>
+                                        <li v-for="(error, index) in validationError" v-bind:key="index"> {{ error }} </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <!-- END: Error Section -->
                     </div>
                 </div>
             </div>
+            <!-- END: Right Page Half -->
         </div>
     </div>
 </template>
