@@ -10,7 +10,7 @@ use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Authentication\PasswordController;
 use App\Http\Controllers\Authentication\RegisterController;
 
-Route::get('/', [TestController::class, 'index']);
+Route::get('/', [TestController::class, 'index'])->name('home');
 
 // Routes of authentication core
 Route::group(['as' => 'auth.'], function() {
@@ -23,5 +23,10 @@ Route::group(['as' => 'auth.'], function() {
         Route::get('/password/reset', [PasswordController::class, 'renderPasswordReset'])->name('password.reset');
 
         Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify');
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        Route::post('/login', [LoginController::class, 'login'])->name('login');
     });
 });
