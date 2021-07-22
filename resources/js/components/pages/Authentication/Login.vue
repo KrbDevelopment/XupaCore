@@ -146,11 +146,61 @@
 </template>
 
 <script>
+// Components -> Icons
 import { XCircleIcon } from '@heroicons/vue/outline'
 
+// Libraries
+import { Inertia } from '@inertiajs/inertia'
+
 export default {
+    data() {
+        return {
+            // Login Credentials
+            email: null,
+            password: null,
+            remember_me: null,
+
+            // Post Login
+            validationError: null
+        }
+    },
     components: {
         XCircleIcon
+    },
+    methods: {
+
+        /**
+         * Perform login attempt for login form
+         */
+        performLoginAttempt() {
+            // Clear recent validation errors
+            this.validationError = null
+
+            Inertia.post(window.route('auth.login'), {
+                // Post Content
+                email: this.email,
+                password: this.password,
+                remember_me: this.remember_me
+            }, {
+                // Server Response Handler
+
+                preserveScroll: true, // Keep scrolling position (freeze position)
+
+                /**
+                 * Successful server response [HTTP Code: 2xx]
+                 * @param response [Object] Server response containing props, etc.
+                 */
+                onSuccess: (response) => {},
+
+                /**
+                 * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
+                 * @param error
+                 */
+                onError: (error) => {
+                    this.validationError = error
+                }
+            })
+        }
     }
 }
 </script>
