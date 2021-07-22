@@ -56,10 +56,11 @@
                                 <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
                                        type="text" placeholder="mail@gmail.com" value="mail@gmail.com" v-model="email">
 
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.email">
                                     <XCircleIcon class="h-6 w-6 text-red-600" />
                                 </div>
                             </div>
+                            <p class="mt-2 text-sm text-red-600" id="email-error" v-if="this.validationError?.email">{{ this.validationError?.email }}</p>
                         </div>
                         <!-- END: Email field -->
 
@@ -73,10 +74,11 @@
                                     class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
                                     type="password" placeholder="Enter your password" v-model="password">
 
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.password">
                                     <XCircleIcon class="h-6 w-6 text-red-600" />
                                 </div>
                             </div>
+                            <p class="mt-2 text-sm text-red-600" id="password-error" v-if="this.validationError?.password">{{ this.validationError?.password }}</p>
                         </div>
                         <!-- END: Password field -->
 
@@ -176,7 +178,7 @@ export default {
             // Clear recent validation errors
             this.validationError = null
 
-            Inertia.post(window.route('auth.login'), {
+            Inertia.post(window.route('auth.requests.login'), {
                 // Post Content
                 email: this.email,
                 password: this.password,
