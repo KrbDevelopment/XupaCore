@@ -6,7 +6,7 @@
                  style="background-image: url(https://images.unsplash.com/photo-1579451861283-a2239070aaa9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80);">
                 <div class="absolute bg-xupa-darkest opacity-75 inset-0 z-0"></div>
                 <div class="w-full  lg:max-w-2xl md:max-w-md z-10">
-                    <div class="sm:text-4xl xl:text-6xl font-bold leading-tight mb-6">Reference site about Lorem Ipsum..</div>
+                    <div class="sm:text-4xl xl:text-6xl font-bold leading-tight mb-6">Welcome to <br />Xupa...</div>
                     <div class="sm:text-sm xl:text-md text-gray-200 font-normal"> What is Lorem Ipsum Lorem Ipsum is simply dummy
                         text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever
                         since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it
@@ -17,7 +17,7 @@
             <!-- END: Left Page Half -->
 
             <!-- Right Page Half -->
-            <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-1/2 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
+            <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-1/2 sm:py-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
                 <div class="max-w-md w-full space-y-8">
                     <div class="text-center">
                         <h2 class="mt-6 text-3xl font-bold text-gray-900">
@@ -96,9 +96,9 @@
 
                             <!-- Forgot Password Anchor -->
                             <div class="text-sm">
-                                <a href="#" class="font-medium text-xupa hover:textxupa-dark">
+                                <Link :href="this.route('auth.render.password.forgot')" as="a" class="font-medium text-xupa hover:textxupa-dark">
                                     Forgot your password?
-                                </a>
+                                </Link>
                             </div>
                             <!-- END: Forgot Password Anchor -->
                         </div>
@@ -113,10 +113,9 @@
                         </div>
                         <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
                             <span>Don't have an account?</span>
-                            <a href="#"
-                               class="text-xupa hover:text-xupa-dark no-underline hover:underline cursor-pointer transition ease-in duration-300">
+                            <Link :href="this.route('auth.render.register')" as="a" class="text-xupa hover:text-xupa-dark no-underline hover:underline cursor-pointer transition ease-in duration-300">
                                 Sign up
-                            </a>
+                            </Link>
                         </p>
                         <!-- END: Action Buttons -->
                     </form>
@@ -153,6 +152,7 @@ import { XCircleIcon } from '@heroicons/vue/outline'
 
 // Libraries
 import { Inertia } from '@inertiajs/inertia'
+import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
     data() {
@@ -167,10 +167,11 @@ export default {
         }
     },
     components: {
+        Link,
         XCircleIcon
     },
     methods: {
-
+        route(routeName, data = {}) { return window.route(routeName, data) },
         /**
          * Perform login attempt for login form
          */
