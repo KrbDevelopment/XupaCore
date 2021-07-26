@@ -17,9 +17,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        // Base
         'name',
         'email',
         'password',
+
+        // Social Login
+        'social_facebook',
+        'social_github'
     ];
 
     /**

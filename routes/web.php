@@ -25,6 +25,15 @@ Route::group(['as' => 'auth.'], function() {
         Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify');
     });
 
+    // Third-Party-Login
+    Route::group(['as' => 'socialite.'], function() {
+        Route::get('/external/facebook', [LoginController::class, 'loginFacebook'])->name('facebook');
+        Route::get('/external/facebook/callback', [LoginController::class, 'callbackFacebook'])->name('facebook.callback');
+
+        Route::get('/external/github', [LoginController::class, 'loginGithub'])->name('github');
+        Route::get('/external/github/callback', [LoginController::class, 'callbackGithub'])->name('github.callback');
+    });
+
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
