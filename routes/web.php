@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Auth\ConfirmPasswordController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -21,31 +23,24 @@ Route::group(['as' => 'auth.'], function() {
 
         Route::get('/password/forgot', [PasswordController::class, 'renderPasswordForgot'])->name('password.forgot');
         Route::get('/password/reset', [PasswordController::class, 'renderPasswordReset'])->name('password.reset');
+        Route::get('/password/confirm', [ConfirmPasswordController::class, 'renderPasswordConfirm'])->name('password.confirm');
 
         Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify');
     });
 
     // Third-Party-Login
     Route::group(['as' => 'socialite.'], function() {
-        Route::get('/external/facebook/login', [LoginController::class, 'loginFacebook'])->name('facebook.login');
-        Route::get('/external/facebook/callback/login', [LoginController::class, 'callbackFacebook'])->name('facebook.callback.login');
+        Route::get('/external/facebook/login', [LoginController::class, 'loginFacebook'])->name('facebook');
+        Route::get('/external/facebook/callback/login', [LoginController::class, 'callbackFacebook'])->name('facebook.callback');
 
-        Route::get('/external/github/login', [LoginController::class, 'loginGithub'])->name('github.login');
-        Route::get('/external/github/callback/login', [LoginController::class, 'callbackGithub'])->name('github.callback.login');
-    });
-
-    // Third-Party-Register
-    Route::group(['as' => 'socialite.'], function() {
-        Route::get('/external/facebook/register', [RegisterController::class, 'registerFacebook'])->name('facebook.register');
-        Route::get('/external/facebook/callback/register', [RegisterController::class, 'callbackFacebook'])->name('facebook.callback.register');
-
-        Route::get('/external/github/register', [RegisterController::class, 'registerGithub'])->name('github.register');
-        Route::get('/external/github/callback/register', [RegisterController::class, 'callbackGithub'])->name('github.callback.register');
+        Route::get('/external/github/login', [LoginController::class, 'loginGithub'])->name('github');
+        Route::get('/external/github/callback/login', [LoginController::class, 'callbackGithub'])->name('github.callback');
     });
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
+        Route::get('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
     });
 });
