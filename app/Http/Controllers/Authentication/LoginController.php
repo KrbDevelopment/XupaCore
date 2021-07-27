@@ -13,6 +13,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -41,61 +42,52 @@ class LoginController extends Controller
     }
 
     // Socialite Login
-    public function loginFacebook() {
+    public function loginFacebook(): RedirectResponse
+    {
         return Socialite::driver('facebook')->redirect();
     }
 
     public function callbackFacebook()
     {
-        try {
+        $user = Socialite::driver('facebook')->user();
+        $isRegistered = User::where('social_facebook', $user->id)->first();
 
-            $user = Socialite::driver('facebook')->user();
-            $isRegistered = User::where('social_facebook', $user->id)->first();
+        if ($isRegistered) {
+            Auth::login($isRegistered);
+        } else {
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'social_facebook' => $user->id
+            ]);
 
-            if ($isRegistered) {
-                Auth::login($isRegistered);
-                return redirect(route('home'));
-            } else {
-                $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'social_facebook' => $user->id
-                ]);
-
-                Auth::login($newUser);
-                return redirect(route('home'));
-            }
-        } catch (Exception $exception) {
-            dd($exception->getMessage());
+            Auth::login($newUser);
         }
+
+        return redirect(route('home'));
     }
 
-    public function loginGithub()
+    public function loginGithub(): RedirectResponse
     {
         return Socialite::driver('github')->redirect();
     }
 
     public function callbackGithub() {
-        try {
+        $user = Socialite::driver('github')->user();
+        $isRegistered = User::where('social_github', $user->id)->first();
 
-            $user = Socialite::driver('github')->user();
-            $isRegistered = User::where('social_github', $user->id)->first();
+        if ($isRegistered) {
+            Auth::login($isRegistered);
+        } else {
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'social_github' => $user->id
+            ]);
 
-            if ($isRegistered) {
-                Auth::login($isRegistered);
-                return redirect(route('home'));
-            } else {
-                $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'social_github' => $user->id
-                ]);
-
-                Auth::login($newUser);
-                return redirect(route('home'));
-            }
-        } catch (Exception $exception) {
-            dd($exception->getMessage());
+            Auth::login($newUser);
         }
+
+        return redirect(route('home'));
     }
 }
