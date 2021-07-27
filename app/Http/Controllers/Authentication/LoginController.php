@@ -47,17 +47,27 @@ class LoginController extends Controller
 
     public function callbackFacebook()
     {
-        $user = Socialite::driver('facebook')->user();
-        $isRegistered = User::where('social_facebook', $user->id)->first();
+        try {
 
-        if ($isRegistered) {
-            Auth::login($isRegistered);
-            return redirect(route('home'));
+            $user = Socialite::driver('facebook')->user();
+            $isRegistered = User::where('social_facebook', $user->id)->first();
+
+            if ($isRegistered) {
+                Auth::login($isRegistered);
+                return redirect(route('home'));
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'social_facebook' => $user->id
+                ]);
+
+                Auth::login($newUser);
+                return redirect(route('home'));
+            }
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
         }
-
-        return back()->with([
-            'message' => __('auth.failed.socialite.facebook')
-        ]);
     }
 
     public function loginGithub()
@@ -74,11 +84,16 @@ class LoginController extends Controller
             if ($isRegistered) {
                 Auth::login($isRegistered);
                 return redirect(route('home'));
-            }
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'social_github' => $user->id
+                ]);
 
-            return back()->with([
-                'message' => __('auth.failed.socialite.github')
-            ]);
+                Auth::login($newUser);
+                return redirect(route('home'));
+            }
         } catch (Exception $exception) {
             dd($exception->getMessage());
         }
