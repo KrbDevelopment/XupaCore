@@ -41,6 +41,8 @@ Route::group(['as' => 'auth.'], function() {
     Route::group(['as' => 'requests.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
+        Route::post('/password/forgot', [PasswordController::class, 'sendResetLinkEmail'])->name('password.forgot');
         Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
     });
 });
