@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\ConfirmPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Authentication\ConfirmPasswordController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use Illuminate\Support\Facades\Route;

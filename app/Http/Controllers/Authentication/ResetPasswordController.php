@@ -20,10 +20,14 @@ class ResetPasswordController extends Controller
      */
     public function renderPasswordReset(Request $request): Response
     {
-        $request->validate(['token' => 'required']);
-        
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required'
+        ]);
+
         return Inertia::render('Authentication/ResetPassword', [
-            'token' => $request->token
+            'token' => $request->token,
+            'email' => $request->email
         ]);
     }
 
