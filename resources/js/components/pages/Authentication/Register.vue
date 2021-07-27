@@ -123,6 +123,7 @@
                                     <XCircleIcon class="h-6 w-6 text-red-600" />
                                 </div>
                             </div>
+                            <password-meter :password="password" />
                             <p class="mt-2 text-sm text-red-600" id="password-error" v-if="this.validationError?.password">{{ this.validationError?.password }}</p>
                         </div>
                         <!-- END: Password field -->
@@ -194,6 +195,7 @@ import { XCircleIcon } from '@heroicons/vue/outline'
 // Libraries
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
+import PasswordMeter from 'vue-simple-password-meter'
 
 export default {
     data() {
@@ -212,7 +214,8 @@ export default {
     },
     components: {
         Link,
-        XCircleIcon
+        XCircleIcon,
+        PasswordMeter
     },
     methods: {
         route(routeName, data = {}) { return window.route(routeName, data) },
