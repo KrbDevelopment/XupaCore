@@ -41,6 +41,6 @@ Route::group(['as' => 'auth.'], function() {
     Route::group(['as' => 'requests.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
-        Route::get('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
+        Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
     });
 });
