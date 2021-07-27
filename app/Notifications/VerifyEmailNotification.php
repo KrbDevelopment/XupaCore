@@ -11,8 +11,19 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 
-class VerifyEmail extends VerifyEmailBase
+class VerifyEmailNotification extends VerifyEmailBase
 {
+    /**
+     * Get the notification's channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array|string
+     */
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
     public function toMail($notifiable)
     {
         if (static::$toMailCallback) {
