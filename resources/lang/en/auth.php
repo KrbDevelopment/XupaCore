@@ -13,13 +13,8 @@ return [
     |
     */
 
-    'failed' => [
-        'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-        'wrong_user' => 'These credentials do not match our records.',
-        'wrong_password' => 'These credentials do not match our records.',
-        'socialite' => [
-            'facebook' => 'There is no account connected with this Facebook account. Please use another Facebook account or create a new one.',
-            'github' => 'There is no account connected with this GitHub account. Please use another GitHub account or create a new one.'
-        ]
-    ]
+    'failed' => 'These credentials do not match our records.',
+    'password' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
 ];
