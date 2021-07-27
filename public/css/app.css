@@ -751,39 +751,6 @@ select {
 [type='file']:focus {
 	outline: 1px auto -webkit-focus-ring-color;
 }
-.container {
-	width: 100%;
-}
-@media (min-width: 640px) {
-
-	.container {
-		max-width: 640px;
-	}
-}
-@media (min-width: 768px) {
-
-	.container {
-		max-width: 768px;
-	}
-}
-@media (min-width: 1024px) {
-
-	.container {
-		max-width: 1024px;
-	}
-}
-@media (min-width: 1280px) {
-
-	.container {
-		max-width: 1280px;
-	}
-}
-@media (min-width: 1536px) {
-
-	.container {
-		max-width: 1536px;
-	}
-}
 .pointer-events-none {
 	pointer-events: none;
 }
@@ -811,9 +778,6 @@ select {
 }
 .z-10 {
 	z-index: 10;
-}
-.m-0 {
-	margin: 0px;
 }
 .mb-6 {
 	margin-bottom: 1.5rem;
@@ -844,15 +808,6 @@ select {
 }
 .ml-3 {
 	margin-left: 0.75rem;
-}
-.mb-0 {
-	margin-bottom: 0px;
-}
-.mr-auto {
-	margin-right: auto;
-}
-.ml-auto {
-	margin-left: auto;
 }
 .block {
 	display: block;
@@ -1027,14 +982,8 @@ select {
 .p-10 {
 	padding: 2.5rem;
 }
-.p-8 {
-	padding: 2rem;
-}
 .p-4 {
 	padding: 1rem;
-}
-.p-0 {
-	padding: 0px;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1044,10 +993,6 @@ select {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 }
-.py-4 {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-}
 .pr-3 {
 	padding-right: 0.75rem;
 }
@@ -1056,9 +1001,6 @@ select {
 }
 .text-center {
 	text-align: center;
-}
-.align-baseline {
-	vertical-align: baseline;
 }
 .text-3xl {
 	font-size: 1.875rem;
@@ -1156,10 +1098,6 @@ select {
 	--tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-sm {
-	--tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .transition {
 	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
 	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1220,6 +1158,11 @@ select {
 
 	.sm\:rounded-lg {
 		border-radius: 0.5rem;
+	}
+
+	.sm\:py-8 {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
 	}
 
 	.sm\:text-4xl {
