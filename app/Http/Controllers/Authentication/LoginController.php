@@ -70,6 +70,32 @@ class LoginController extends Controller
         }
     }
 
-    public function loginGithub() {}
-    public function callbackGithub() {}
+    public function loginGithub()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function callbackGithub() {
+        try {
+
+            $user = Socialite::driver('github')->user();
+            $isRegistered = User::where('social_github', $user->id)->first();
+
+            if ($isRegistered) {
+                Auth::login($isRegistered);
+                return redirect(route('home'));
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'social_github' => $user->id
+                ]);
+
+                Auth::login($newUser);
+                return redirect(route('home'));
+            }
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
+        }
+    }
 }
