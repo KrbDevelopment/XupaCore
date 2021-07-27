@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\ConfirmPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Authentication\ConfirmPasswordController;
+use App\Http\Controllers\Authentication\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -9,7 +12,7 @@ use App\Http\Controllers\TestController;
 // Authentication
 use App\Http\Controllers\Authentication\EmailController;
 use App\Http\Controllers\Authentication\LoginController;
-use App\Http\Controllers\Authentication\PasswordController;
+use App\Http\Controllers\Authentication\ForgotPasswordController;
 use App\Http\Controllers\Authentication\RegisterController;
 
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
@@ -21,8 +24,8 @@ Route::group(['as' => 'auth.'], function() {
         Route::get('/login', [LoginController::class, 'renderLogin'])->name('login')->middleware('guest');
         Route::get('/register', [RegisterController::class, 'renderRegister'])->name('register')->middleware('guest');
 
-        Route::get('/password/forgot', [PasswordController::class, 'renderPasswordForgot'])->name('password.forgot');
-        Route::get('/password/reset', [PasswordController::class, 'renderPasswordReset'])->name('password.reset');
+        Route::get('/password/forgot', [ForgotPasswordController::class, 'renderPasswordForgot'])->name('password.forgot');
+        Route::get('/password/reset', [ResetPasswordController::class, 'renderPasswordReset'])->name('password.reset');
         Route::get('/password/confirm', [ConfirmPasswordController::class, 'renderPasswordConfirm'])->name('password.confirm');
 
         Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify');
@@ -42,7 +45,8 @@ Route::group(['as' => 'auth.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-        Route::post('/password/forgot', [PasswordController::class, 'sendResetLinkEmail'])->name('password.forgot');
+        Route::post('/password/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.forgot');
+        Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
         Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
     });
 });
