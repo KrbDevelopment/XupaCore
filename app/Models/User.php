@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class User extends Authenticatable
 {
@@ -21,6 +23,8 @@ class User extends Authenticatable
         'username',
         'first_name',
         'last_name',
+
+        'profile_image',
 
         'email',
         'password',
@@ -48,4 +52,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Profile Image
+     */
+
+    /**
+     * Get profile image helper
+     * @return StreamedResponse|null
+     */
+    public function getProfileImage(): ?StreamedResponse
+    {
+        if (!$this->profile_image) return null;
+        return Storage::response(`profile_images/${$this->id}/${$this->profile_image}`);
+    }
+
+    /**
+     * Set profile image helper
+     * @param $image Image Request Image (must be validated)
+     * @return array Array with path and url of image
+     */
+    public function setProfileImage($image): array
+    {
+        $path = $image->store(`profile_images/${$this->id}`);
+        $url = Storage::url($path);
+
+        return [
+            'path' => $path,
+            'url' => $url
+        ];
+    }
 }
