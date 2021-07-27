@@ -10,7 +10,7 @@ use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Authentication\PasswordController;
 use App\Http\Controllers\Authentication\RegisterController;
 
-Route::get('/', [TestController::class, 'index'])->name('home');
+Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
 // Routes of authentication core
 Route::group(['as' => 'auth.'], function() {
@@ -46,5 +46,6 @@ Route::group(['as' => 'auth.'], function() {
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/login', [LoginController::class, 'login'])->name('login');
+        Route::post('/register', [RegisterController::class, 'register'])->name('register');
     });
 });
