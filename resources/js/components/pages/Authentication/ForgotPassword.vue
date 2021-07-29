@@ -78,6 +78,7 @@
                 </div>
             </div>
             <!-- END: Right Page Half -->
+            <Notification />
         </div>
     </div>
 </template>
@@ -125,11 +126,52 @@ export default {
                 preserveScroll: true, // Keep scrolling position (freeze position)
 
                 /**
+                 * Successfully server response
+                 * @param response
+                 */
+                onSuccess: (response) => {
+                    this.$notify(
+                        {
+                            group: 'success',
+                            title: 'The request was sent successfully',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                },
+
+                /**
                  * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
                  * @param error
                  */
                 onError: (error) => {
                     this.validationError = error
+                    this.$notify(
+                        {
+                            group: 'error',
+                            title: 'An error has occurred',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
                 }
             })
         }
