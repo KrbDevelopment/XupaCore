@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen overflow-hidden bg-gray-100 flex flex-col">
+    <div class="min-h-screen bg-gray-100 flex flex-col">
         <!-- Top nav-->
         <header class="flex-shrink-0 relative h-16 bg-white flex items-center">
             <!-- Logo area -->
@@ -141,9 +141,9 @@
         </header>
 
         <!-- Bottom section -->
-        <div class="min-h-0 flex-1 flex overflow-hidden">
+        <div class="min-h-0 flex-1 flex">
             <!-- Narrow sidebar-->
-            <nav aria-label="Sidebar" class="hidden md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto">
+            <nav aria-label="Sidebar" class="md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto">
                 <div class="relative w-20 flex flex-col p-3 space-y-3">
                     <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700', 'flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg']">
                         <span class="sr-only">{{ item.name }}</span>
