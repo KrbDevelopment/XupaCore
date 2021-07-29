@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Authentication\ConfirmPasswordController;
-use App\Http\Controllers\Authentication\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
 use App\Http\Controllers\TestController;
 
 // Authentication
-use App\Http\Controllers\Authentication\EmailController;
-use App\Http\Controllers\Authentication\LoginController;
-use App\Http\Controllers\Authentication\ForgotPasswordController;
-use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\Core\Authentication\LoginController;
+use App\Http\Controllers\Core\Authentication\RegisterController;
+use App\Http\Controllers\Core\Authentication\ForgotPasswordController;
+use App\Http\Controllers\Core\Authentication\ConfirmPasswordController;
+use App\Http\Controllers\Core\Authentication\ResetPasswordController;
+use App\Http\Controllers\Core\Authentication\EmailController;
+
 
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
