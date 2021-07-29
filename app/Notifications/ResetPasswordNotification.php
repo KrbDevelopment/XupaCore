@@ -44,13 +44,13 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Reset Password'))
-            ->line(Lang::getFromJson('Please click the button below to reset your password.'))
+            ->subject('Reset Password')
+            ->line('Please click the button below to reset your password.')
             ->action(
-                Lang::getFromJson('Reset Password'),
+                'Reset Password',
                 route('auth.render.password.reset', ['token' => $this->token])
             )
-            ->line(Lang::getFromJson('If you did requested a new password, no further action is required.'));
+            ->line('If you did requested a new password, no further action is required.');
     }
 
     /**
