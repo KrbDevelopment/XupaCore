@@ -14,7 +14,7 @@
                 <div class="relative">
                     <label for="inbox-select" class="sr-only">Choose inbox</label>
                     <select id="inbox-select" class="rounded-md border-0 bg-none pl-3 pr-8 text-base font-medium text-gray-900 focus:ring-2 focus:ring-xupa">
-                        <option v-for="item in sidebarNavigation" :key="item.name" :selected="item.current">{{ item.name }}</option>
+                        <option v-for="item in sidebarNavigation" :key="item.name" :selected="this.isCurrent(item.href)">{{ item.name }}</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-2">
                         <ChevronDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
@@ -59,7 +59,7 @@
                         <Menu as="div" class="relative inline-block text-left">
                             <MenuButton class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                                <img class="h-8 w-8 rounded-full" :src="$page.props.authentication.user.profile_picture ?? AlternativeProfilePicture" alt="" />
                             </MenuButton>
 
                             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -187,11 +187,6 @@ import {
 
 import AlternativeProfilePicture from '../../../assets/images/profile_picture.png'
 
-const user = {
-    name: 'Whitney Francis',
-    email: 'whitneyfrancis@example.com',
-    imageUrl: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-}
 const navigation = [
     {
         name: 'Inboxes',
@@ -234,11 +229,18 @@ export default {
         SearchIcon,
         XIcon
     },
+    methods: {
+        route(name, options = {}) {
+            return window.route(name, options)
+        },
+        isCurrent(name) {
+            return window.route().current(name)
+        }
+    },
     setup() {
         const mobileMenuOpen = ref(false)
 
         return {
-            user,
             navigation,
             sidebarNavigation,
             userNavigation,
