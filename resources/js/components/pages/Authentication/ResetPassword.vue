@@ -98,7 +98,6 @@ import { XCircleIcon } from '@heroicons/vue/outline'
 
 // Libraries
 import { Inertia } from '@inertiajs/inertia'
-import { Link } from '@inertiajs/inertia-vue3'
 import PasswordMeter from 'vue-simple-password-meter'
 
 export default {
@@ -114,7 +113,6 @@ export default {
         }
     },
     components: {
-        Link,
         XCircleIcon,
         PasswordMeter
     },
