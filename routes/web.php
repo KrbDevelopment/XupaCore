@@ -16,11 +16,11 @@ use App\Http\Controllers\Authentication\RegisterController;
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
 // Routes of authentication core
-Route::group(['as' => 'auth.'], function() {
+Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
     // Render Pages
     Route::group(['as' => 'render.'], function() {
-        Route::get('/login', [LoginController::class, 'renderLogin'])->name('login')->middleware('guest');
-        Route::get('/register', [RegisterController::class, 'renderRegister'])->name('register')->middleware('guest');
+        Route::get('/login', [LoginController::class, 'renderLogin'])->name('login');
+        Route::get('/register', [RegisterController::class, 'renderRegister'])->name('register');
 
         Route::get('/password/forgot', [ForgotPasswordController::class, 'renderPasswordForgot'])->name('password.forgot');
         Route::get('/password/reset', [ResetPasswordController::class, 'renderPasswordReset'])->name('password.reset');
