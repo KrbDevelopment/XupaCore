@@ -40,6 +40,8 @@
     },
     "dependencies": {
         "@babel/eslint-parser": "^7.14.7",
+        "@vue-hero-icons/outline": "^1.7.2",
+        "@vue-hero-icons/solid": "^1.7.2",
         "vue-simple-password-meter": "^1.1.0",
         "vue3-vt-notifications": "^1.0.1"
     }

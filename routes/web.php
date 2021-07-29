@@ -15,6 +15,11 @@ use App\Http\Controllers\Core\Authentication\EmailController;
 
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
+// Routes of Profile core
+Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
+    Route::get('/profile/basic', [ProfileController::class, 'renderProfileBasic'])->name('basic'); // Basic Profile Page
+});
+
 // Routes of authentication core
 Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
     // Render Pages
