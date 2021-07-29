@@ -11,6 +11,7 @@
         @inertia
         @routes
         @larabugJavaScriptClient
+	    @include('cookie-consent::index')
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
