@@ -35,11 +35,12 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "tailwindcss": "^2.2.4",
-        "vue": "^3.1.4",
+        "vue": "^3.1.5",
         "vue-loader": "^16.3.0"
     },
     "dependencies": {
         "@babel/eslint-parser": "^7.14.7",
-        "vue-simple-password-meter": "^1.1.0"
+        "vue-simple-password-meter": "^1.1.0",
+        "vue3-vt-notifications": "^1.0.1"
     }
 }
