@@ -50,7 +50,7 @@
                             <div class="relative">
                                 <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Firstname</label>
                                 <div class="relative mt-1">
-                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                            type="text" placeholder="Enter your Firstname" v-model="first_name">
 
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.first_name">
@@ -65,7 +65,7 @@
                             <div class="relative">
                                 <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Lastname</label>
                                 <div class="relative mt-1">
-                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                            type="text" placeholder="Enter your Lastname" v-model="last_name">
 
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.last_name">
@@ -82,7 +82,7 @@
                             <div class="relative">
                                 <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Username</label>
                                 <div class="relative mt-1">
-                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                            type="text" placeholder="Enter your Username" v-model="username">
 
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.username">
@@ -97,7 +97,7 @@
                             <div class="relative">
                                 <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Email</label>
                                 <div class="relative mt-1">
-                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                            type="text" placeholder="mail@gmail.com" v-model="email">
 
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.email">
@@ -116,7 +116,7 @@
                             </label>
                             <div class="relative mt-1">
                                 <input
-                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                     type="password" placeholder="Enter your password" v-model="password">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.password">
@@ -135,7 +135,7 @@
                             </label>
                             <div class="relative mt-1">
                                 <input
-                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                     type="password" placeholder="Enter your password again" v-model="password_confirmation">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.password_confirmation">
