@@ -29,7 +29,7 @@
                         <div class="relative">
                             <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Password</label>
                             <div class="relative mt-1">
-                                <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                        type="password" placeholder="Enter your new Password" v-model="password">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.password">
@@ -45,7 +45,7 @@
                         <div class="relative">
                             <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Repeat Password</label>
                             <div class="relative mt-1">
-                                <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
+                                <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
                                        type="password" placeholder="Enter your new Password again" v-model="password_confirmation">
 
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none" v-if="this.validationError?.password_confirmation">
@@ -88,6 +88,7 @@
                 </div>
             </div>
             <!-- END: Right Page Half -->
+            <Notification />
         </div>
     </div>
 </template>
@@ -140,11 +141,53 @@ export default {
                 preserveScroll: true, // Keep scrolling position (freeze position)
 
                 /**
+                 * Successfully server response
+                 * @param response
+                 */
+                onSuccess: (response) => {
+                    this.$notify(
+                        {
+                            group: 'success',
+                            title: 'Password has been reset!',
+                            text: 'Your password has now been successfully reset.',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                },
+
+                /**
                  * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
                  * @param error
                  */
                 onError: (error) => {
                     this.validationError = error
+                    this.$notify(
+                        {
+                            group: 'error',
+                            title: 'An error has occurred',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
                 }
             })
         }
