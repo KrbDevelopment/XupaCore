@@ -13,7 +13,6 @@ use App\Http\Controllers\Core\Authentication\ConfirmPasswordController;
 use App\Http\Controllers\Core\Authentication\ResetPasswordController;
 use App\Http\Controllers\Core\Authentication\EmailController;
 
-
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
 // Routes of authentication core
