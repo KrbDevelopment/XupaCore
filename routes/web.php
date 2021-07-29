@@ -24,9 +24,9 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
 
         Route::get('/password/forgot', [ForgotPasswordController::class, 'renderPasswordForgot'])->name('password.forgot');
         Route::get('/password/reset', [ResetPasswordController::class, 'renderPasswordReset'])->name('password.reset');
-        Route::get('/password/confirm', [ConfirmPasswordController::class, 'renderPasswordConfirm'])->name('password.confirm');
+        Route::get('/password/confirm', [ConfirmPasswordController::class, 'renderPasswordConfirm'])->name('password.confirm')->withoutMiddleware('guest');
 
-        Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify');
+        Route::get('/email/verify', [EmailController::class, 'renderEmailVerify'])->name('email.verify')->withoutMiddleware('guest');
     });
 
     // Third-Party-Login
@@ -45,6 +45,8 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
 
         Route::post('/password/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.forgot');
         Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
-        Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm');
+        Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm')->withoutMiddleware('guest');
+
+        Route::post('/email/verify', [EmailController::class, 'verify'])->name('email.verify')->withoutMiddleware('guest');
     });
 });
