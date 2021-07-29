@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 // Controllers
 use App\Http\Controllers\TestController;
 
+// Core
+use App\Http\Controllers\Profile\ProfileController;
+
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
 use App\Http\Controllers\Core\Authentication\RegisterController;
