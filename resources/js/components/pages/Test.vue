@@ -208,11 +208,11 @@
                             <div class="border-t border-gray-200 pt-4 pb-3">
                                 <div class="max-w-8xl mx-auto px-4 flex items-center sm:px-6">
                                     <div class="flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+                                        <img class="h-10 w-10 rounded-full" :src="$page.props.authentication.user.profile_picture ?? AlternativeProfilePicture" alt="Profile picture" />
                                     </div>
                                     <div class="ml-3 min-w-0 flex-1">
-                                        <div class="text-base font-medium text-gray-800 truncate">{{ user.name }}</div>
-                                        <div class="text-sm font-medium text-gray-500 truncate">{{ user.email }}</div>
+                                        <div class="text-base font-medium text-gray-800 truncate">@{{ $page.props.authentication.user.username }}</div>
+                                        <div class="text-sm font-medium text-gray-500 truncate">{{ $page.props.authentication.user.email }}</div>
                                     </div>
                                     <a href="#" class="ml-auto flex-shrink-0 bg-white p-2 text-gray-400 hover:text-gray-500">
                                         <span class="sr-only">View notifications</span>
@@ -274,11 +274,12 @@ import {
     XIcon
 } from '@heroicons/vue/outline'
 
+import AlternativeProfilePicture from '../../../assets/images/profile_picture.png'
+
 const user = {
     name: 'Whitney Francis',
     email: 'whitneyfrancis@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+    imageUrl: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 const navigation = [
     {
@@ -330,7 +331,8 @@ export default {
             navigation,
             sidebarNavigation,
             userNavigation,
-            mobileMenuOpen
+            mobileMenuOpen,
+            AlternativeProfilePicture
         }
     }
 }
