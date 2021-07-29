@@ -43,7 +43,7 @@
 
                         <!-- Password Confirmation field -->
                         <div class="relative">
-                            <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Password</label>
+                            <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">Repeat Password</label>
                             <div class="relative mt-1">
                                 <input class="w-full text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:outline-none focus:border-xupa"
                                        type="password" placeholder="Enter your new Password again" v-model="password_confirmation">
@@ -102,6 +102,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import PasswordMeter from 'vue-simple-password-meter'
 
 export default {
+    props: ['email', 'token'],
     data() {
         return {
             // User Credentials
@@ -130,6 +131,8 @@ export default {
                 // Post Content
                 password: this.password,
                 password_confirmation: this.password_confirmation,
+                email: this.email,
+                token: this.token,
 
                 // CSRF Token
                 _token: this.$page.props.csrf_token
