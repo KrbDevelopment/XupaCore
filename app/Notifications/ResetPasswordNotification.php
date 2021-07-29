@@ -13,15 +13,17 @@ class ResetPasswordNotification extends Notification
     use Queueable;
 
     private $token;
+    private $email;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token, $email)
     {
         $this->token = $token;
+        $this->email = $email;
     }
 
     /**
@@ -48,7 +50,7 @@ class ResetPasswordNotification extends Notification
             ->line('Please click the button below to reset your password.')
             ->action(
                 'Reset Password',
-                route('auth.render.password.reset', ['token' => $this->token])
+                route('auth.render.password.reset', ['token' => $this->token, 'email' => $this->email])
             )
             ->line('If you did requested a new password, no further action is required.');
     }
