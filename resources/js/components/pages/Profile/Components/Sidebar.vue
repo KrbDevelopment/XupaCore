@@ -2,7 +2,7 @@
     <div class="col-span-12 w-full px-3 justify-center flex space-x-4 md:space-x-0 md:flex-col md:col-span-2 md:justify-start">
         <div class="flex items-center justify-center">
             <div class="flex w-full max-w-xs p-4">
-                <ul class="flex flex-col w-full">
+                <ul class="flex flex-wrap flex-col w-full">
                     <li class="my-px">
                         <span class="flex font-medium text-sm text-gray-400 px-4 my-4 uppercase">Navigation</span>
                     </li>
