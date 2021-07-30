@@ -110,12 +110,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="max-w-8xl mx-auto py-3 px-2 sm:px-4">
-                                <template v-for="item in navigation" :key="item.name">
-                                    <a :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-100">{{ item.name }}</a>
-                                    <a v-for="child in item.children" :key="child.name" :href="child.href" class="block rounded-md py-2 pl-5 pr-3 text-base font-medium text-gray-500 hover:bg-gray-100">{{ child.name }}</a>
-                                </template>
-                            </div>
                             <div class="border-t border-gray-200 pt-4 pb-3">
                                 <div class="max-w-8xl mx-auto px-4 flex items-center sm:px-6">
                                     <div class="flex-shrink-0">
@@ -143,7 +137,7 @@
         <!-- Bottom section -->
         <div class="min-h-0 flex-1 flex">
             <!-- Narrow sidebar-->
-            <nav aria-label="Sidebar" class="md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto">
+            <nav aria-label="Sidebar" class="md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto hidden">
                 <div class="relative w-20 flex flex-col p-3 space-y-3">
                     <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700', 'flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg']">
                         <span class="sr-only">{{ item.name }}</span>
