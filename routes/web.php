@@ -7,6 +7,7 @@ use App\Http\Controllers\TestController;
 
 // Core
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Core\NotificationController;
 
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
@@ -21,6 +22,20 @@ Route::get('/', [TestController::class, 'index'])->name('home')->middleware('aut
 // Routes of Profile core
 Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
     Route::get('/profile/basic', [ProfileController::class, 'renderProfileBasic'])->name('basic'); // Basic Profile Page
+});
+
+// Routes of Notifications
+Route::group(['as' => 'notifications.', 'prefix' => 'notifications', 'middleware' => 'auth'], function() {
+    // Render
+    Route::group(['as' => 'render.'], function() {
+       Route::get('/', [NotificationController::class, 'renderNotificationCenter'])->name('notifications');
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        Route::post('/read/single', [NotificationController::class, 'markAsReadSingle'])->name('read.single');
+        Route::post('/read/array', [NotificationController::class, 'markAsReadArray'])->name('read.array');
+    });
 });
 
 // Routes of authentication core
