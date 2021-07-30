@@ -148,7 +148,7 @@
                 <div class="relative w-20 flex flex-col p-3 space-y-3">
                     <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700', 'flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg']">
                         <span class="sr-only">{{ item.name }}</span>
-                        <span class="h-6 w-6" v-html="item.icon" />
+                        <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
                     </a>
                 </div>
             </nav>
