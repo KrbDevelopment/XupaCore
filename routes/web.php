@@ -21,7 +21,18 @@ Route::get('/', [TestController::class, 'index'])->name('home')->middleware('aut
 
 // Routes of Profile core
 Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
-    Route::get('/profile/basic', [ProfileController::class, 'renderProfileBasic'])->name('basic'); // Basic Profile Page
+    // Render Pages
+    Route::group(['as' => 'render.'], function() {
+        Route::get('/profile/general', [ProfileController::class, 'renderProfileGeneral'])->name('general'); // General Profile Page
+        Route::get('/profile/security', [ProfileController::class, 'renderProfileSecurity'])->name('security'); // Security Profile Page
+        Route::get('/profile/notifications', [ProfileController::class, 'renderProfileNotifications'])->name('notifications'); // Security Profile Page
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user informations
+        Route::post('/profile/security', [ProfileController::class, 'changePassword'])->name('password.change'); // Change users password
+    });
 });
 
 // Routes of Notifications
