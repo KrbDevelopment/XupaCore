@@ -51,13 +51,10 @@
                                     <div class="w-full">
                                         <div class="w-full px-6 py-6 flex border-0 border-gray-100 border-t-2 bg-gradient-from-bl bg-gradient-to-tr hover:from-white hover:to-gray-50" v-for="notification in this.$page.props.notifications" v-bind:key="notification.id">
                                             <div v-if="notification.icon">
-                                                <div class="rounded-full bg-red-50 flex justify-center items-center" :style="`background-color: ${notification.color}10;`">
-                                                    <component :is="notification.icon" class="w-6 h-6 m-2 text-red" :style="`color: ${notification.color};`"/>
-                                                </div>
+                                                <div class="rounded-full bg-red-50 flex justify-center items-center" :style="`background-color: ${notification.color}10; color: ${notification.color};`" v-html="notification.icon"></div>
                                             </div>
                                             <div class="ml-4">
                                                 <p class="text-gray-900 font-semibold text-sm capitalize mb-2" v-if="notification.title">{{ notification.title }}</p>
-                                                <p class="text-gray-700 text-sm mb-1">{{ notification.message.substring(0, 150) }}...</p>
                                                 <p class="text-gray-500 font-semibold text-xs capitalize">{{ formatNotificationDate(notification.created_at) }}</p>
                                             </div>
                                         </div>
@@ -151,7 +148,7 @@
                 <div class="relative w-20 flex flex-col p-3 space-y-3">
                     <a v-for="item in sidebarNavigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700', 'flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg']">
                         <span class="sr-only">{{ item.name }}</span>
-                        <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
+                        <span class="h-6 w-6" v-html="item.icon" />
                     </a>
                 </div>
             </nav>
