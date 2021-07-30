@@ -7,6 +7,7 @@ use App\Http\Controllers\TestController;
 
 // Core
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Core\NotificationController;
 
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
@@ -31,6 +32,20 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
     Route::group(['as' => 'requests.'], function() {
         Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user informations
         Route::post('/profile/security', [ProfileController::class, 'changePassword'])->name('password.change'); // Change users password
+    });
+});
+
+// Routes of Notifications
+Route::group(['as' => 'notifications.', 'prefix' => 'notifications', 'middleware' => 'auth'], function() {
+    // Render
+    Route::group(['as' => 'render.'], function() {
+       Route::get('/', [NotificationController::class, 'renderNotificationCenter'])->name('notifications');
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        Route::post('/read/single', [NotificationController::class, 'markAsReadSingle'])->name('read.single');
+        Route::post('/read/array', [NotificationController::class, 'markAsReadArray'])->name('read.array');
     });
 });
 
