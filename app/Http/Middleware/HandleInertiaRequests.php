@@ -42,7 +42,14 @@ class HandleInertiaRequests extends Middleware
                 return $request->user() ?? null;
             },
             'notifications' => function () {
-                return Notification::loadRecentNotifications();
+                return Notification::loadRecentNotifications(5, true, [
+                    'id',
+                    'title',
+                    'message',
+                    'color',
+                    'icon',
+                    'created_at'
+                ]);
             }
         ]);
     }

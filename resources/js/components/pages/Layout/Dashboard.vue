@@ -9,19 +9,6 @@
                 </a>
             </div>
 
-            <!-- Picker area -->
-            <div class="mx-auto md:hidden">
-                <div class="relative">
-                    <label for="inbox-select" class="sr-only">Choose inbox</label>
-                    <select id="inbox-select" class="rounded-md border-0 bg-none pl-3 pr-8 text-base font-medium text-gray-900 focus:ring-2 focus:ring-xupa">
-                        <option v-for="item in sidebarNavigation" :key="item.name" :selected="this.isCurrent(item.href)">{{ item.name }}</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-2">
-                        <ChevronDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
-                    </div>
-                </div>
-            </div>
-
             <!-- Menu button area -->
             <div class="absolute inset-y-0 right-0 pr-4 flex items-center sm:pr-6 md:hidden">
                 <!-- Mobile menu button -->
@@ -49,12 +36,35 @@
                         <a href="#" class="text-sm font-medium text-gray-900">Settings</a>
                     </nav>
                     <div class="flex items-center space-x-8">
-                    <span class="inline-flex">
-                        <a @click="$refs.NotificationModal.open = true" class="-mx-1 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">View notifications</span>
-                            <BellIcon class="h-6 w-6" aria-hidden="true" />
-                        </a>
-                    </span>
+                        <Menu as="div" class="relative inline-block text-left">
+                            <MenuButton class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
+                                <span class="sr-only">View notifications</span>
+                                <BellIcon class="h-6 w-6" aria-hidden="true" />
+                            </MenuButton>
+
+                            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                                <MenuItems class="origin-top-right absolute z-30 right-0 mt-2 overflow-hidden rounded-md w-96 shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div class="w-full px-5 py-6 flex justify-between shadow">
+                                        <p class="uppercase text-gray-600 text-sm font-semibold">Notifications</p>
+                                        <p class="text-gray-600 text-sm cursor-pointer" @click="markAsRead">Mark as read</p>
+                                    </div>
+                                    <div class="w-full">
+                                        <div class="w-full px-6 py-6 flex border-0 border-gray-100 border-t-2 bg-gradient-from-bl bg-gradient-to-tr hover:from-white hover:to-gray-50" v-for="notification in this.$page.props.notifications" v-bind:key="notification.id">
+                                            <div v-if="notification.icon">
+                                                <div class="rounded-full bg-red-50 flex justify-center items-center" :style="`background-color: ${notification.color}10;`">
+                                                    <component :is="notification.icon" class="w-6 h-6 m-2 text-red" :style="`color: ${notification.color};`"/>
+                                                </div>
+                                            </div>
+                                            <div class="ml-4">
+                                                <p class="text-gray-900 font-semibold text-sm capitalize mb-2" v-if="notification.title">{{ notification.title }}</p>
+                                                <p class="text-gray-700 text-sm mb-1">{{ notification.message.substring(0, 150) }}...</p>
+                                                <p class="text-gray-500 font-semibold text-xs capitalize">{{ formatNotificationDate(notification.created_at) }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </MenuItems>
+                            </transition>
+                        </Menu>
 
                         <Menu as="div" class="relative inline-block text-left">
                             <MenuButton class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
@@ -180,24 +190,11 @@ import {
     UserCircleIcon,
     XIcon
 } from '@heroicons/vue/outline'
-
 import AlternativeProfilePicture from '../../../../assets/images/profile_picture.png'
-import NotificationModal from '../Notifications/OverviewModal'
+import { Inertia } from '@inertiajs/inertia'
+import moment from 'moment'
 import Notifications from '../../global/Notifications'
 
-const navigation = [
-    {
-        name: 'Inboxes',
-        href: '#',
-        children: [
-            { name: 'Technical Support', href: '#' },
-            { name: 'Sales', href: '#' },
-            { name: 'General', href: '#' }
-        ]
-    },
-    { name: 'Reporting', href: '#', children: [] },
-    { name: 'Settings', href: '#', children: [] }
-]
 const sidebarNavigation = [
     { name: 'Open', href: '#', icon: InboxIcon, current: true },
     { name: 'Archive', href: '#', icon: ArchiveIcon, current: false },
@@ -226,8 +223,7 @@ export default {
         ChevronDownIcon,
         MenuIcon,
         SearchIcon,
-        XIcon,
-        NotificationModal
+        XIcon
     },
     methods: {
         route(name, options = {}) {
@@ -235,13 +231,76 @@ export default {
         },
         isCurrent(name) {
             return window.route().current(name)
+        },
+        markAsRead() {
+            const notificationIds = this.$page.props.notifications.map(notification => {
+                return notification.id
+            })
+
+            console.log(this.$page.props.notifications)
+
+            Inertia.post(this.route('notifications.requests.read.array'), {
+                notifications: notificationIds
+            }, {
+                preserveScroll: true, // Keep scrolling position (freeze position)
+
+                /**
+                 * Successful server response [HTTP Code: 2x]
+                 */
+                onSuccess: () => {
+                    this.$notify(
+                        {
+                            group: 'success',
+                            text: 'You\'re notifications has been marked as read',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                },
+
+                /**
+                 * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
+                 */
+                onError: () => {
+                    this.$notify(
+                        {
+                            group: 'error',
+                            title: 'An error has occurred',
+                            text: 'We weren\'t able to mark the notifications as read',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                }
+            })
+        },
+        formatNotificationDate(date) {
+            console.log(date)
+            return moment(new Date(date)).format('MMM DD • H:mma')
         }
     },
     setup() {
         const mobileMenuOpen = ref(false)
 
         return {
-            navigation,
             sidebarNavigation,
             userNavigation,
             mobileMenuOpen,
