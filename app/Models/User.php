@@ -27,6 +27,8 @@ class User extends Authenticatable
         'last_name',
 
         'profile_image',
+        'banner',
+        'biography',
 
         'email',
         'password',
@@ -90,6 +92,32 @@ class User extends Authenticatable
     public function setProfileImage($image): array
     {
         $path = $image->store(`profile_images/${$this->id}`);
+        $url = Storage::url($path);
+
+        return [
+            'path' => $path,
+            'url' => $url
+        ];
+    }
+
+    /**
+     * Get banner helper
+     * @return StreamedResponse|null
+     */
+    public function getBanner(): ?StreamedResponse
+    {
+        if (!$this->banner) return null;
+        return Storage::response(`profile_banner/${$this->id}/${$this->banner}`);
+    }
+
+    /**
+     * Set banner helper
+     * @param $image Image Request Image (must be validated)
+     * @return array Array with path and url of image
+     */
+    public function setBanner($image): array
+    {
+        $path = $image->store(`profile_banner/${$this->id}`);
         $url = Storage::url($path);
 
         return [
