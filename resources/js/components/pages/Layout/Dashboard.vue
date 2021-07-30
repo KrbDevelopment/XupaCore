@@ -152,7 +152,7 @@
             </main>
         </div>
 
-        <NotificationModal ref="NotificationModal" />
+        <notifications />
     </div>
 </template>
 
@@ -183,6 +183,7 @@ import {
 
 import AlternativeProfilePicture from '../../../../assets/images/profile_picture.png'
 import NotificationModal from '../Notifications/OverviewModal'
+import Notifications from '../../global/Notifications'
 
 const navigation = [
     {
@@ -212,6 +213,7 @@ const userNavigation = [
 
 export default {
     components: {
+        Notifications,
         Dialog,
         DialogOverlay,
         Menu,
