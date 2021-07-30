@@ -50,7 +50,7 @@
                     </nav>
                     <div class="flex items-center space-x-8">
                     <span class="inline-flex">
-                        <a href="#" class="-mx-1 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500">
+                        <a @click="$refs.NotificationModal.open = true" class="-mx-1 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500">
                             <span class="sr-only">View notifications</span>
                             <BellIcon class="h-6 w-6" aria-hidden="true" />
                         </a>
@@ -157,6 +157,8 @@
                 <slot />
             </main>
         </div>
+
+        <NotificationModal ref="NotificationModal" />
     </div>
 </template>
 
@@ -186,6 +188,7 @@ import {
 } from '@heroicons/vue/outline'
 
 import AlternativeProfilePicture from '../../../../assets/images/profile_picture.png'
+import NotificationModal from '../Notifications/OverviewModal'
 
 const navigation = [
     {
@@ -227,7 +230,8 @@ export default {
         ChevronDownIcon,
         MenuIcon,
         SearchIcon,
-        XIcon
+        XIcon,
+        NotificationModal
     },
     methods: {
         route(name, options = {}) {
