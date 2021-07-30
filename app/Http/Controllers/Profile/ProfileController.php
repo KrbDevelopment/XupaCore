@@ -1,3 +1,4 @@
+<?php
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
@@ -68,5 +69,14 @@ class ProfileController extends Controller
     public function renderProfileSecurity(): Response
     {
         return Inertia::render('Profile/Security');
+    }
+
+    /**
+     * Render Profile notification setting page
+     * @return Response Inertia Render Response
+     */
+    public function renderProfileNotifications(): Response
+    {
+        return Inertia::render('Profile/Notifications');
     }
 }
