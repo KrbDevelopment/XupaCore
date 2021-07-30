@@ -38178,6 +38178,7 @@ var _hoisted_3 = {
   "class": "top h-64 relative"
 };
 
+var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("data-v-7fae21f6");
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
   src: "https://cdn.discordapp.com/attachments/676421183561793546/870672426814566500/default-banner.png",
   alt: "",
@@ -38231,6 +38232,9 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
+var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
+  return null;
+});
 var _hoisted_9 = {
   "class": "text-2xl font-semibold opacity-100"
 };
