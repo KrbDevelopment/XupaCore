@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -126,5 +127,14 @@ class User extends Authenticatable
             'path' => $path,
             'url' => $url
         ];
+    }
+
+    /**
+     * Get preferences belongs to user
+     * @return HasOne
+     */
+    public function preferences(): HasOne
+    {
+        return $this->hasOne(UserPreference::class);
     }
 }
