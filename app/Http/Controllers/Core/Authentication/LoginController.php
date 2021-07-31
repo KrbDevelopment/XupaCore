@@ -75,13 +75,21 @@ class LoginController extends Controller
     public function callbackGithub() {
         $user = Socialite::driver('github')->user();
         $isRegistered = User::where('social_github', $user->id)->first();
-
+        
         if ($isRegistered) {
             Auth::login($isRegistered);
         } else {
+            $name = explode(' ', $user->name);
+            $last = $name[sizeof($name) - 1];
+            array_pop($name);
+            $first = join(' ', $name);
+
             $newUser = User::create([
-                'name' => $user->name,
+                'username' => $user->user['name'],
+                'first_name' => $first,
+                'last_name' => $last,
                 'email' => $user->email,
+                'profile_image' => $user->user['avatar_url'],
                 'social_github' => $user->id
             ]);
 

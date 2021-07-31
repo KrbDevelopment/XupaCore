@@ -65,11 +65,11 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
 
     // Third-Party-Login
     Route::group(['as' => 'socialite.'], function() {
-        Route::get('/external/facebook/login', [LoginController::class, 'loginFacebook'])->name('facebook');
-        Route::get('/external/facebook/callback/login', [LoginController::class, 'callbackFacebook'])->name('facebook.callback');
+        Route::get('/external/facebook', [LoginController::class, 'loginFacebook'])->name('facebook');
+        Route::get('/external/facebook/callback', [LoginController::class, 'callbackFacebook'])->name('facebook.callback');
 
-        Route::get('/external/github/login', [LoginController::class, 'loginGithub'])->name('github');
-        Route::get('/external/github/callback/login', [LoginController::class, 'callbackGithub'])->name('github.callback');
+        Route::get('/external/github', [LoginController::class, 'loginGithub'])->name('github');
+        Route::get('/external/github/callback', [LoginController::class, 'callbackGithub'])->name('github.callback');
     });
 
     // Requests

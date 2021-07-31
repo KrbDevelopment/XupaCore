@@ -81,6 +81,7 @@ class User extends Authenticatable
     public function getProfileImage(): ?StreamedResponse
     {
         if (!$this->profile_image) return null;
+        if (str_starts_with($this->profile_image, 'http')) return $this->profile_image;
         return Storage::response(`profile_images/${$this->id}/${$this->profile_image}`);
     }
 
@@ -107,6 +108,7 @@ class User extends Authenticatable
     public function getBanner(): ?StreamedResponse
     {
         if (!$this->banner) return null;
+        if (str_starts_with($this->banner, 'http')) return $this->banner;
         return Storage::response(`profile_banner/${$this->id}/${$this->banner}`);
     }
 
