@@ -16,11 +16,20 @@ module.exports = {
                     light: '#ea6153',
                     lightest: '#ed7669'
                 }
+            },
+            backgroundSize: {
+                'size-200': '200% 200%'
+            },
+            backgroundPosition: {
+                'pos-0': '0% 0%',
+                'pos-100': '100% 100%'
             }
         }
     },
     variants: {
-        extend: {}
+        extend: {
+            blur: ['hover']
+        }
     },
     plugins: [
         require('@tailwindcss/forms'),
