@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
 // Core
-use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Core\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
 
 // Authentication
@@ -31,8 +31,9 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
-        Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user informations
+        Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user information
         Route::post('/profile/security', [ProfileController::class, 'changePassword'])->name('password.change'); // Change users password
+        Route::post('/profile/notifications', [ProfileController::class, 'updatePreferences'])->name('preferences.change'); // Change users password
         Route::post('/profile/banner', [ProfileController::class, 'updateBanner'])->name('banner.update'); // Change users banner
         Route::post('/profile/profile_image', [ProfileController::class, 'updateProfileImage'])->name('profile_image.update'); // Change users profile image
     });
