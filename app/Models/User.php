@@ -82,23 +82,21 @@ class User extends Authenticatable
     {
         if (!$this->profile_image) return null;
         if (str_starts_with($this->profile_image, 'http')) return $this->profile_image;
-        return Storage::response(`profile_images/${$this->id}/${$this->profile_image}`);
+        return Storage::response($this->profile_image);
     }
 
     /**
      * Set profile image helper
      * @param $image Image Request Image (must be validated)
-     * @return array Array with path and url of image
+     * @return string String with the path of the image
      */
-    public function setProfileImage($image): array
+    public function setProfileImage($image): string
     {
-        $path = $image->store(`profile_images/${$this->id}`);
-        $url = Storage::url($path);
+        $path = $image->store('profile_images');
+        $this->profile_image = $path;
+        $this->save();
 
-        return [
-            'path' => $path,
-            'url' => $url
-        ];
+        return $path;
     }
 
     /**
@@ -109,22 +107,21 @@ class User extends Authenticatable
     {
         if (!$this->banner) return null;
         if (str_starts_with($this->banner, 'http')) return $this->banner;
-        return Storage::response(`profile_banner/${$this->id}/${$this->banner}`);
+        return Storage::response($this->banner);
     }
 
     /**
      * Set banner helper
      * @param $image Image Request Image (must be validated)
-     * @return array Array with path and url of image
+     * @return string String with the path of the image
      */
-    public function setBanner($image): array
+    public function setBanner($image): string
     {
-        $path = $image->store(`profile_banner/${$this->id}`);
-        $url = Storage::url($path);
+        $path = $image->store('profile_banner');
 
-        return [
-            'path' => $path,
-            'url' => $url
-        ];
+        $this->banner = $path;
+        $this->save();
+
+        return $path;
     }
 }
