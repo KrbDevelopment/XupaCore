@@ -8,6 +8,7 @@ use App\Http\Controllers\TestController;
 // Core
 use App\Http\Controllers\Core\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
+use App\Http\Controllers\Core\PermissionController;
 
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
@@ -53,7 +54,7 @@ Route::group(['as' => 'notifications.', 'prefix' => 'notifications', 'middleware
     });
 });
 
-// Routes of authentication core
+// Routes of Authentication core
 Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
     // Render Pages
     Route::group(['as' => 'render.'], function() {
@@ -86,5 +87,27 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
         Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm')->withoutMiddleware('guest');
 
         Route::post('/email/verify', [EmailController::class, 'verify'])->name('email.verify')->withoutMiddleware('guest');
+    });
+});
+
+// Routes of Permissions core
+Route::group(['as' => 'permissions.', 'middleware' => 'auth'], function() {
+    // Render
+    Route::group(['as' => 'render.'], function() {
+        Route::get('/roles', [PermissionController::class, 'render_roles'])->name('roles');
+        Route::get('/roles/{role}', [PermissionController::class, 'render_role_details'])->name('roles.detail');
+
+        Route::get('/permissions', [PermissionController::class, 'render_permissions'])->name('permissions');
+        Route::get('/permissions/{permission}', [PermissionController::class, 'render_permission_details'])->name('permissions.detail');
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        Route::post('/roles', [PermissionController::class, 'create_role'])->name('role.create');
+        Route::delete('/roles/single', [PermissionController::class, 'delete_role_single'])->name('role.delete.single');
+        Route::delete('/roles/array', [PermissionController::class, 'delete_role_array'])->name('role.delete.array');
+        Route::post('/roles/{role}', [PermissionController::class, 'update_role'])->name('role.update');
+        Route::put('/roles/{role}/{permission}', [PermissionController::class, 'attach_permission_on_role'])->name('role.permission.attach');
+        Route::delete('/roles/{role}/{permission}', [PermissionController::class, 'detach_permission_on_role'])->name('role.permission.detach');
     });
 });
