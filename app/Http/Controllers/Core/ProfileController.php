@@ -20,8 +20,29 @@ class ProfileController extends Controller
      * Render Profile basic page
      * @return Response Inertia Render Response
      */
-    public function renderProfileGeneral(): Response {
+    public function renderProfileGeneral(): Response
+    {
         return Inertia::render('Profile/General');
+    }
+
+    /**
+     * Render Profile security page
+     * @return Response Inertia Render Response
+     */
+    public function renderProfileSecurity(): Response
+    {
+        return Inertia::render('Profile/Security');
+    }
+
+    /**
+     * Render Profile notification setting page
+     * @return Response Inertia Render Response
+     */
+    public function renderProfileNotifications(Request $request): Response
+    {
+        return Inertia::render('Profile/Notifications', [
+            'preferences' => $request->user()->preferences
+        ]);
     }
 
     /**
@@ -92,22 +113,34 @@ class ProfileController extends Controller
     }
 
     /**
-    * Render Profile security page
-    * @return Response Inertia Render Response
-    */
-    public function renderProfileSecurity(): Response
+     * Update banner from user
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updateBanner(Request $request): RedirectResponse
     {
-        return Inertia::render('Profile/Security');
+        $request->validate([
+            'banner'=>'required|image|max:5120'
+        ]);
+
+        $request->user()->setBanner($request->file("banner"));
+
+        return back();
     }
 
     /**
-     * Render Profile notification setting page
-     * @return Response Inertia Render Response
+     * Update profile image from user
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function renderProfileNotifications(Request $request): Response
+    public function updateProfileImage(Request $request): RedirectResponse
     {
-        return Inertia::render('Profile/Notifications', [
-            'preferences' => $request->user()->preferences
+        $request->validate([
+            'profile_image'=>'required|image|max:5120'
         ]);
+
+        $request->user()->setProfileImage($request->file("profile_image"));
+
+        return back();
     }
 }
