@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\PasswordChangedNotification;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
@@ -19,14 +20,33 @@ class ProfileController extends Controller
      * Render Profile basic page
      * @return Response Inertia Render Response
      */
-    public function renderProfileGeneral(): Response {
+    public function renderProfileGeneral(): Response
+    {
         return Inertia::render('Profile/General');
     }
 
     /**
-    * Update User Profile
-    * @return RedirectResponse Inertia Render Response
-    */
+     * Render Profile notification setting page
+     * @return Response Inertia Render Response
+     */
+    public function renderProfileNotifications(): Response
+    {
+        return Inertia::render('Profile/Notifications');
+    }
+
+    /**
+     * Render Profile security page
+     * @return Response Inertia Render Response
+     */
+    public function renderProfileSecurity(): Response
+    {
+        return Inertia::render('Profile/Security');
+    }
+
+    /**
+     * Update User Profile
+     * @return RedirectResponse Inertia Render Response
+     */
     public function updateProfile(Request $request): RedirectResponse {
         $request->validate([
             'first_name'=>'required|string|max:255',
@@ -44,10 +64,10 @@ class ProfileController extends Controller
     }
 
     /**
-    * Change current User password
-    * @return RedirectResponse Inertia Render Response
-    * @throws AuthenticationException
-    */
+     * Change current User password
+     * @return RedirectResponse Inertia Render Response
+     * @throws AuthenticationException
+     */
     public function changePassword(Request $request): RedirectResponse {
         $request->validate([
             'current_password'=>'required|string|max:255',
@@ -59,24 +79,40 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        $user->notify(new PasswordChangedNotification());
+
         return back();
     }
 
     /**
-    * Render Profile security page
-    * @return Response Inertia Render Response
-    */
-    public function renderProfileSecurity(): Response
+     * Update banner from user
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updateBanner(Request $request): RedirectResponse
     {
-        return Inertia::render('Profile/Security');
+        $request->validate([
+           'banner'=>'required|image|max:5120'
+        ]);
+
+        $request->user()->setBanner($request->file("banner"));
+
+        return back();
     }
 
     /**
-     * Render Profile notification setting page
-     * @return Response Inertia Render Response
+     * Update profile image from user
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function renderProfileNotifications(): Response
+    public function updateProfileImage(Request $request): RedirectResponse
     {
-        return Inertia::render('Profile/Notifications');
+        $request->validate([
+            'profile_image'=>'required|image|max:5120'
+        ]);
+
+        $request->user()->setProfileImage($request->file("profile_image"));
+
+        return back();
     }
 }
