@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserPreference;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
@@ -44,6 +45,34 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update user preferences
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updatePreferences(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'notification_projects' => 'nullable|boolean',
+            'notification_weekly_newsletter' => 'nullable|boolean',
+            'notification_weekly_evaluation' => 'nullable|boolean',
+            'notification_account_related' => 'nullable|boolean'
+        ]);
+
+        $user = $request->user();
+        $data = array_merge($request->all(), ['user_id' => $request->user()->id]);
+
+        if ($user->preferences) {
+            $user->preferences->update($data);
+            $user->preferences->save();
+        } else {
+            UserPreference::create($data);
+        }
+
+
+        return back();
+    }
+
+    /**
     * Change current User password
     * @return RedirectResponse Inertia Render Response
     * @throws AuthenticationException
@@ -75,8 +104,10 @@ class ProfileController extends Controller
      * Render Profile notification setting page
      * @return Response Inertia Render Response
      */
-    public function renderProfileNotifications(): Response
+    public function renderProfileNotifications(Request $request): Response
     {
-        return Inertia::render('Profile/Notifications');
+        return Inertia::render('Profile/Notifications', [
+            'preferences' => $request->user()->preferences
+        ]);
     }
 }

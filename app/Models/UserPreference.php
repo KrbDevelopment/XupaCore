@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserPreference extends Model
 {
-    protected $table = 'user_preferences';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+
+        'notification_projects',
+        'notification_weekly_newsletter',
+        'notification_weekly_evaluation',
+        'notification_account_related'
+    ];
 
     /**
      * Get User belongs to preferences

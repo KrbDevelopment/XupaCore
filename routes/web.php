@@ -30,8 +30,9 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
-        Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user informations
+        Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user information
         Route::post('/profile/security', [ProfileController::class, 'changePassword'])->name('password.change'); // Change users password
+        Route::post('/profile/notifications', [ProfileController::class, 'updatePreferences'])->name('preferences.change'); // Change users password
     });
 });
 

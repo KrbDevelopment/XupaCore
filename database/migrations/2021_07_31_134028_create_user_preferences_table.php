@@ -20,8 +20,8 @@ class CreateUserPreferencesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->boolean('notification_projects')->default(true);
-            $table->boolean('notification_weeky_newsletter')->default(true);
-            $table->boolean('notification_weeky_evaluation')->default(true);
+            $table->boolean('notification_weekly_newsletter')->default(true);
+            $table->boolean('notification_weekly_evaluation')->default(true);
             $table->boolean('notification_account_related')->default(true);
 
             $table->timestamps();
