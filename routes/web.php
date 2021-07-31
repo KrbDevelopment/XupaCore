@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Core\UserAssetController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -32,7 +33,15 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
     Route::group(['as' => 'requests.'], function() {
         Route::post('/profile/general', [ProfileController::class, 'updateProfile'])->name('general'); // Update general user informations
         Route::post('/profile/security', [ProfileController::class, 'changePassword'])->name('password.change'); // Change users password
+        Route::post('/profile/banner', [ProfileController::class, 'updateBanner'])->name('banner.update'); // Change users banner
+        Route::post('/profile/profile_image', [ProfileController::class, 'updateProfileImage'])->name('profile_image.update'); // Change users profile image
     });
+});
+
+// Routes of User core
+Route::group(['as' => 'user.', 'middleware' => 'auth'], function() {
+    Route::get('/user/{user}/banner', [UserAssetController::class, 'getProfileBanner'])->name('banner');
+    Route::get('/user/{user}/profile_image', [UserAssetController::class, 'getProfileImage'])->name('profile_image');
 });
 
 // Routes of Notifications
