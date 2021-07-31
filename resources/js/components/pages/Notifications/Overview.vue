@@ -31,18 +31,18 @@
                     <div class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end">
                         <div class="flex items-center py-3 lg:py-0 lg:px-6">
                             <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">Viewing {{ this.allNotifications.from ?? 0 }} - {{ this.allNotifications.to ?? 0 }} of {{ this.allNotifications.total ?? 0 }}</p>
-                            <a class="text-gray-600 dark:text-gray-400 ml-2 border-transparent cursor-pointer rounded">
+                            <Link as="a" :href="this.allNotifications.prev_page_url" v-if="this.allNotifications.prev_page_url" class="text-gray-600 dark:text-gray-400 ml-2 border-transparent cursor-pointer rounded">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
                                     <polyline points="15 6 9 12 15 18" />
                                 </svg>
-                            </a>
-                            <a class="text-gray-600 dark:text-gray-400 border-transparent rounded focus:outline-none cursor-pointer">
+                            </Link>
+                            <Link as="a" :href="this.allNotifications.next_page_url" v-if="this.allNotifications.next_page_url" class="text-gray-600 dark:text-gray-400 border-transparent rounded focus:outline-none cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
                                     <polyline points="9 6 15 12 9 18" />
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -123,6 +123,7 @@ import DashboardLayout from '../Layout/Dashboard'
 import moment from 'moment'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Inertia } from '@inertiajs/inertia'
+import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
     props: ['allNotifications'],
@@ -131,13 +132,17 @@ export default {
         Menu,
         MenuButton,
         MenuItem,
-        MenuItems
+        MenuItems,
+        Link
     },
     data() {
         return {
             selected: [],
             allSelected: false
         }
+    },
+    mounted() {
+        console.log(this.allNotifications)
     },
     watch: {
         allSelected: function (newVal) {
