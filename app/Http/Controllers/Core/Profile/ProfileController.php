@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Core\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;

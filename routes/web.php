@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
 // Core
-use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Core\Profile\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
 
 // Authentication
