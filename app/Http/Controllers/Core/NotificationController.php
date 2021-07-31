@@ -20,11 +20,12 @@ class NotificationController extends Controller
     public function markAsReadSingle(Request $request): RedirectResponse
     {
         $request->validate([
-            'notification' => 'required|int|exists:notifications,id'
+            'notification' => 'required|int|exists:notifications,id',
+            'state' => 'nullable|boolean'
         ]);
 
         $notification = Notification::findOrFail($request->notification);
-        $notification->read = true;
+        $notification->read = $request->has('state') ? $request->state : true;
         $notification->save();
 
         return back();
@@ -40,16 +41,16 @@ class NotificationController extends Controller
     {
         $request->validate([
             'notifications' => 'required|array',
-            'notifications.*' => 'required|int|exists:notifications,id'
+            'notifications.*' => 'required|int|exists:notifications,id',
+            'state' => 'nullable|boolean'
         ]);
 
         foreach ($request->notifications as $notification) {
             $notification = Notification::findOrFail($notification);
-            $notification->read = true;
+            $notification->read = $request->has('state') ? $request->state : true;
             $notification->save();
         }
 
         return back();
     }
-
 }
