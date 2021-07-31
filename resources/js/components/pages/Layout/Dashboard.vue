@@ -234,8 +234,6 @@ export default {
                 return notification.id
             })
 
-            console.log(this.$page.props.notifications)
-
             Inertia.post(this.route('notifications.requests.read.array'), {
                 notifications: notificationIds
             }, {
@@ -290,7 +288,6 @@ export default {
             })
         },
         formatNotificationDate(date) {
-            console.log(date)
             return moment(new Date(date)).format('MMM DD • H:mma')
         }
     },
