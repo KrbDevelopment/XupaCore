@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     public function callbackFacebook()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
         $isRegistered = User::where('social_facebook', $user->id)->first();
 
         if ($isRegistered) {
@@ -73,7 +73,7 @@ class LoginController extends Controller
     }
 
     public function callbackGithub() {
-        $user = Socialite::driver('github')->user();
+        $user = Socialite::driver('github')->stateless()->user();
         $isRegistered = User::where('social_github', $user->id)->first();
 
         if ($isRegistered) {
