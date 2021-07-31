@@ -46,6 +46,9 @@ Route::group(['as' => 'notifications.', 'prefix' => 'notifications', 'middleware
     Route::group(['as' => 'requests.'], function() {
         Route::post('/read/single', [NotificationController::class, 'markAsReadSingle'])->name('read.single');
         Route::post('/read/array', [NotificationController::class, 'markAsReadArray'])->name('read.array');
+
+        Route::post('/dismiss/single', [NotificationController::class, 'deleteNotificationsSingle'])->name('dismiss.single');
+        Route::post('/dismiss/array', [NotificationController::class, 'deleteNotificationsArray'])->name('dismiss.array');
     });
 });
 

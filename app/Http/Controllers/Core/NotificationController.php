@@ -11,6 +11,19 @@ use Inertia\Response;
 
 class NotificationController extends Controller
 {
+    /**
+     * Render Notification Center Page
+     * @return Response Inertia Render Response
+     */
+    public function renderNotificationCenter(Request $request): Response
+    {
+        return Inertia::render('Notifications/Overview', [
+            'allNotifications' => Notification
+                ::where('user_id', $request->user()->id)
+                ->orderBy('read', 'asc')
+                ->paginate(10)
+        ]);
+    }
 
     /**
      * Function to mark a single notification as read
