@@ -15,7 +15,7 @@ class AddSocialColumnsInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('social_facebook')->nullable()->after('password');
-            $table->string('social_github')->nullable()->after('social_twitter');
+            $table->string('social_github')->nullable()->after('social_facebook');
 
             $table->string('password')->nullable()->change();
         });
