@@ -28,10 +28,40 @@ class PermissionController extends Controller
     /**
      * @return Response Inertia Render Response
      */
-    public function render_role_details(Role $role): Response
+    public function render_role_details_settings(Role $role): Response
     {
-        return Inertia::render('Permissions/Roles/Detail', [
-            'role' => $role->with('permissions')
+        return Inertia::render('Permissions/Roles/DetailPages/Settings', [
+            'role' => $role->with('permissions')->firstOrFail()
+        ]);
+    }
+
+    /**
+     * @return Response Inertia Render Response
+     */
+    public function render_role_details_access(Role $role): Response
+    {
+        return Inertia::render('Permissions/Roles/DetailPages/Access', [
+            'role' => $role->with('permissions')->firstOrFail()
+        ]);
+    }
+
+    /**
+     * @return Response Inertia Render Response
+     */
+    public function render_role_details_notifications(Role $role): Response
+    {
+        return Inertia::render('Permissions/Roles/DetailPages/Notifications', [
+            'role' => $role->with('permissions')->firstOrFail()
+        ]);
+    }
+
+    /**
+     * @return Response Inertia Render Response
+     */
+    public function render_role_details_integrations(Role $role): Response
+    {
+        return Inertia::render('Permissions/Roles/DetailPages/Integrations', [
+            'role' => $role->with('permissions')->firstOrFail()
         ]);
     }
 

@@ -95,7 +95,12 @@ Route::group(['as' => 'permissions.', 'middleware' => 'auth'], function() {
     // Render
     Route::group(['as' => 'render.'], function() {
         Route::get('/roles', [PermissionController::class, 'render_roles'])->name('roles');
-        Route::get('/roles/{role}', [PermissionController::class, 'render_role_details'])->name('roles.detail');
+
+        Route::get('/roles/{role}', [PermissionController::class, 'render_role_details_settings'])->name('roles.detail');
+        Route::get('/roles/{role}/settings', [PermissionController::class, 'render_role_details_settings'])->name('roles.detail.settings');
+        Route::get('/roles/{role}/access', [PermissionController::class, 'render_role_details_access'])->name('roles.detail.access');
+        Route::get('/roles/{role}/notifications', [PermissionController::class, 'render_role_details_notifications'])->name('roles.detail.notifications');
+        Route::get('/roles/{role}/integrations', [PermissionController::class, 'render_role_details_integrations'])->name('roles.detail.integrations');
 
         Route::get('/permissions', [PermissionController::class, 'render_permissions'])->name('permissions');
         Route::get('/permissions/{permission}', [PermissionController::class, 'render_permission_details'])->name('permissions.detail');
