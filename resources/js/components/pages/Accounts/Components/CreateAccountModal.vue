@@ -155,14 +155,14 @@ export default {
             // Clear recent validation errors
             this.validationError = null
 
-            Inertia.post(window.route('auth.requests.register'), {
+            Inertia.post(window.route('accounts.requests.account.create'), {
                 // Post Content
-                first_name: this.first_name,
-                last_name: this.last_name,
-                username: this.username,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation,
+                first_name: this.account.first_name,
+                last_name: this.account.last_name,
+                username: this.account.username,
+                email: this.account.email,
+                password: this.account.password,
+                password_confirmation: this.account.password_confirmation,
 
                 // CSRF Token
                 _token: this.$page.props.csrf_token
@@ -172,11 +172,35 @@ export default {
                 preserveScroll: true, // Keep scrolling position (freeze position)
 
                 /**
+                 * Successful server response [HTTP Code: 2x]
+                 */
+                onSuccess: () => {
+                    this.$notify(
+                        {
+                            group: 'success',
+                            text: 'Account has been created successfully',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                },
+
+                /**
                  * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
                  * @param error
                  */
                 onError: (error) => {
                     this.validationError = error
+                    console.log(error)
                     this.$notify(
                         {
                             group: 'error',
