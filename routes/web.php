@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Core\UserAssetController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -9,6 +8,8 @@ use App\Http\Controllers\TestController;
 // Core
 use App\Http\Controllers\Core\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
+use App\Http\Controllers\Core\UserAssetController;
+use App\Http\Controllers\Core\AccountController;
 
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
@@ -36,6 +37,19 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
         Route::post('/profile/notifications', [ProfileController::class, 'updatePreferences'])->name('preferences.change'); // Change users password
         Route::post('/profile/banner', [ProfileController::class, 'updateBanner'])->name('banner.update'); // Change users banner
         Route::post('/profile/profile_image', [ProfileController::class, 'updateProfileImage'])->name('profile_image.update'); // Change users profile image
+    });
+});
+
+// Routes of Account management core
+Route::group(['as' => 'accounts.', 'middleware' => 'auth'], function() {
+    // Render Pages
+    Route::group(['as' => 'render.'], function() {
+        Route::get('/accounts', [AccountController::class, 'renderAccountsOverview'])->name('accounts.overview'); // General Profile Page
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+        // Empty
     });
 });
 
