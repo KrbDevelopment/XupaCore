@@ -77,6 +77,7 @@
                                                     <div class="mt-1">
                                                         <input type="password" name="account-password" id="account-password" :class="`block w-full shadow-sm sm:text-sm focus:ring-xupa focus:border-xupa border-gray-300 rounded-md ${this.validationErrors.password ? 'border-red-700' : ''}`" v-model="account.password" />
                                                     </div>
+                                                    <password-meter :password="account.password" />
                                                     <p class="text-sm text-red-700 mt-1 float-right" v-if="this.validationErrors.password">{{ this.validationErrors.password }}</p>
                                                 </div>
                                                 <div>
@@ -114,6 +115,7 @@ import { ref } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XIcon } from '@heroicons/vue/outline'
 import { Inertia } from '@inertiajs/inertia'
+import PasswordMeter from 'vue-simple-password-meter'
 
 export default {
     components: {
@@ -122,6 +124,7 @@ export default {
         DialogTitle,
         TransitionChild,
         TransitionRoot,
+        PasswordMeter,
         XIcon
     },
     data() {
