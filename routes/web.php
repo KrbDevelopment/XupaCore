@@ -49,6 +49,7 @@ Route::group(['as' => 'accounts.', 'middleware' => 'auth'], function() {
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
+        Route::post('/accounts/create', [AccountController::class, 'createAccount'])->name('account.create');
         Route::delete('/accounts/delete/single', [AccountController::class, 'delete_account_single'])->name('account.delete.single');
         Route::delete('/accounts/delete/array', [AccountController::class, 'delete_account_array'])->name('account.delete.array');
     });
