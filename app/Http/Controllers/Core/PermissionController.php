@@ -40,7 +40,9 @@ class PermissionController extends Controller
      */
     public function render_permissions(): Response
     {
-        return Inertia::render('Permissions/Permissions/Overview');
+        return Inertia::render('Permissions/Permissions/Overview', [
+            'permissions' => Permission::withCount('roles')->paginate(15)
+        ]);
     }
 
     /**
