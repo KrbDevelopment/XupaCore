@@ -20,8 +20,8 @@ class AccountController extends Controller
      */
     public function renderAccountsOverview(): Response
     {
-        return Inertia::render('Accounts/Overview', [
-            'allAccounts' => User::all()
+        return Inertia::render('Accounts/Overview',  [
+            'accounts' => User::all()
         ]);
     }
 }
