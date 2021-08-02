@@ -87,7 +87,7 @@
                                         <MenuItems class="origin-top-right absolute z-30 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <div class="py-1">
                                                 <MenuItem v-slot="{ active }">
-                                                    <Link as="a" href="" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                                                    <Link as="a" :href="this.route('accounts.render.account.details', account.id)" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                                                         Open
                                                     </Link>
                                                 </MenuItem>
@@ -170,7 +170,7 @@ export default {
             })
         },
         deleteAccount(id) {
-            Inertia.delete(this.route('accounts.requests.account.delete.single', { account: id }), {
+            Inertia.delete(this.route('accounts.requests.account.delete.single', { user: id }), {
                 preserveScroll: true, // Keep scrolling position (freeze position)
 
                 /**
