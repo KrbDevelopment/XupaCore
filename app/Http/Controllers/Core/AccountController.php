@@ -27,19 +27,14 @@ class AccountController extends Controller
     }
 
     /**
-     * Delete array of user accounts
-     * @param Request $request
+     * Delete single user account
+     * @param User $user
      * @return RedirectResponse
      */
-    public function delete_account_single(Request $request): RedirectResponse
+    public function delete_account_single(User $user): RedirectResponse
     {
-        $request->validate([
-            'account' => 'required|int|exists:users,id'
-        ]);
-
-        $account = User::findOrFail($request->account);
-        $account->delete();
-
+        error_log(print_r($user, true));
+        $user->delete();
         return back();
     }
 
