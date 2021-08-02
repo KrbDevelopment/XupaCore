@@ -35182,9 +35182,7 @@ __webpack_require__.r(__webpack_exports__);
     ChevronLeftIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_1__.ChevronLeftIcon,
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Link,
     UserIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__.UserIcon,
-    KeyIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__.KeyIcon,
-    BellIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__.BellIcon,
-    ViewGridAddIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__.ViewGridAddIcon
+    LockClosedIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_2__.LockClosedIcon
   },
   data: function data() {
     return {};
@@ -35338,11 +35336,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       // User Credentials
-      first_name: this.$page.props.account.first_name,
-      last_name: this.$page.props.account.last_name,
-      username: this.$page.props.account.username,
-      email: this.$page.props.account.email,
-      biography: this.$page.props.account.biography,
+      password: null,
+      password_confirmation: null,
       // Post Login
       validationError: null
     };
@@ -35354,22 +35349,19 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     /**
-     * Perform update attempt for profile form
+     * Perform change password attempt for password form
      */
-    performUpdateAttempt: function performUpdateAttempt(user) {
+    performChangePasswordAttempt: function performChangePasswordAttempt(user) {
       var _this = this;
 
       // Clear recent validation errors
       this.validationError = null;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(window.route('accounts.requests.account.update.general', {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(window.route('accounts.requests.account.change.password', {
         user: user
       }), {
         // Post Content
-        first_name: this.first_name,
-        last_name: this.last_name,
-        username: this.username,
-        email: this.email,
-        biography: this.biography,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
         // CSRF Token
         _token: this.$page.props.csrf_token
       }, {
@@ -35384,8 +35376,8 @@ __webpack_require__.r(__webpack_exports__);
         onSuccess: function onSuccess(response) {
           _this.$notify({
             group: 'success',
-            title: 'Profile updated',
-            text: 'your profile has been updated',
+            title: 'Password changed',
+            text: 'the account password has been changed',
             transitionGroupClasses: {
               enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
               enterActiveClass: 'transform ease-out duration-300 transition',
@@ -37829,9 +37821,9 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
   "class": "ml-3 text-sm"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "font-medium text-blue-gray-900"
-}, "Notifications"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+}, "Security"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "mt-1 text-blue-gray-500"
-}, "Here you can see current members of this role and invite new users")], -1
+}, "Here you can see and change the security settings of the account")], -1
 /* HOISTED */
 );
 
@@ -37847,7 +37839,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
-  var _component_BellIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BellIcon");
+  var _component_LockClosedIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LockClosedIcon");
 
   var _component_DashboardLayout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DashboardLayout");
 
@@ -37880,7 +37872,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BellIcon, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LockClosedIcon, {
             "class": "flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400",
             "aria-hidden": "true"
           }), _hoisted_12];
@@ -38005,9 +37997,6 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex justify-end"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "button",
-  "class": "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa"
-}, " Cancel "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit",
   "class": "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa"
 }, " Save ")])], -1
@@ -38106,9 +38095,9 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
   "class": "text-lg leading-6 font-medium text-gray-900"
-}, " General "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+}, " Security "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "mt-1 max-w-2xl text-sm text-gray-500"
-}, " This page will show you the current preferences of the Administrator role ")], -1
+}, " This page shows you the current security settings of the account ")], -1
 /* HOISTED */
 );
 
@@ -38116,85 +38105,37 @@ var _hoisted_3 = {
   "class": "mt-6 sm:mt-5 space-y-6 sm:space-y-5"
 };
 var _hoisted_4 = {
-  "class": "flex flex-row justify-center items-center space-x-3 w-full"
-};
-var _hoisted_5 = {
   "class": "content-center w-full"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "ml-1 text-sm font-bold text-gray-700 tracking-wide"
-}, " Firstname ", -1
+}, " New Password ", -1
 /* HOISTED */
 );
 
+var _hoisted_6 = {
+  "class": "relative mt-1"
+};
 var _hoisted_7 = {
-  "class": "relative mt-1"
-};
-var _hoisted_8 = {
   "class": "content-center w-full"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "ml-1 text-sm font-bold text-gray-700 tracking-wide"
-}, " Lastname ", -1
+}, " Repeat Password ", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
-  "class": "relative mt-1"
-};
-var _hoisted_11 = {
-  "class": "flex flex-row justify-center items-center space-x-3 w-full"
-};
-var _hoisted_12 = {
-  "class": "content-center w-full"
-};
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "class": "ml-1 text-sm font-bold text-gray-700 tracking-wide"
-}, " Username ", -1
-/* HOISTED */
-);
-
-var _hoisted_14 = {
-  "class": "relative mt-1"
-};
-var _hoisted_15 = {
-  "class": "content-center w-full"
-};
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "class": "ml-1 text-sm font-bold text-gray-700 tracking-wide"
-}, " Email Address ", -1
-/* HOISTED */
-);
-
-var _hoisted_17 = {
-  "class": "relative mt-1"
-};
-var _hoisted_18 = {
-  "class": "content-center w-full"
-};
-
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "class": "ml-1 text-sm font-bold text-gray-700"
-}, " Biography ", -1
-/* HOISTED */
-);
-
-var _hoisted_20 = {
+var _hoisted_9 = {
   "class": "relative mt-1"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "pt-5"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex justify-end"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "button",
-  "class": "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa"
-}, " Cancel "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit",
   "class": "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa"
 }, " Save ")])], -1
@@ -38210,57 +38151,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
         "class": "space-y-8 divide-y divide-gray-200",
-        onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-          return $options.performUpdateAttempt($props.account);
+        onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return $options.performChangePasswordAttempt($props.account);
         }, ["prevent"]))
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Firstname field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Password field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         "class": "w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0",
-        type: "text",
-        placeholder: "Enter your firstname",
+        type: "password",
+        placeholder: "Enter a new Password",
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.first_name = $event;
+          return $data.password = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.first_name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Firstname field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Lastname field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.password]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: New Password field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Password field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         "class": "w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0",
-        type: "text",
-        placeholder: "Enter your lastname",
+        type: "password",
+        placeholder: "Enter the new Password again",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $data.last_name = $event;
+          return $data.password_confirmation = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.last_name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Lastname field ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Username field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        "class": "w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0",
-        type: "text",
-        placeholder: "Enter your username",
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.username = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.username]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Username field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Email field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        "class": "w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0",
-        type: "email",
-        placeholder: "Enter your email address",
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return $data.email = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.email]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Email field ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Biography field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
-        "class": "w-full content-center text-base px-4 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0",
-        type: "email",
-        placeholder: "Write your biography here",
-        rows: "5",
-        cols: "30",
-        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-          return $data.biography = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.biography]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Biography field ")])])]), _hoisted_21], 32
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.password_confirmation]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: New Password field ")])])]), _hoisted_10], 32
       /* HYDRATE_EVENTS */
       )];
     }),

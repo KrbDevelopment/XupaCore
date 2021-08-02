@@ -59,7 +59,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function update_account(Request $request, User $user)
+    public function updateAccount(Request $request, User $user)
     {
         $request->validate([
             'first_name'=>'required|string|max:255',
@@ -70,6 +70,21 @@ class AccountController extends Controller
         ]);
 
         $user->update($request->all());
+        $user->save();
+
+        return back();
+    }
+
+    /**
+     * Change password of User
+     * @return RedirectResponse Inertia Render Response
+     */
+    public function changePassword(Request $request, User $user): RedirectResponse {
+        $request->validate([
+            'password'=>'required|string|max:255|confirmed'
+        ]);
+
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return back();
