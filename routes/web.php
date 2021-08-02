@@ -44,14 +44,18 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
 Route::group(['as' => 'accounts.', 'middleware' => 'auth'], function() {
     // Render Pages
     Route::group(['as' => 'render.'], function() {
-        Route::get('/accounts', [AccountController::class, 'renderAccountsOverview'])->name('accounts.overview'); // General Profile Page
+        Route::get('/accounts', [AccountController::class, 'renderAccountsOverview'])->name('accounts.overview'); // Render Accounts Overview Page
+        Route::get('/account/{user}/details', [AccountController::class, 'renderAccountDetails'])->name('account.details'); // Render Account Detail Page
+        Route::get('/account/{user}/details/general', [AccountController::class, 'renderAccountGeneralDetails'])->name('account.details.general'); // Render Account Detail Page (General Tab)
+        Route::get('/account/{user}/details/security', [AccountController::class, 'renderAccountSecurityDetails'])->name('account.details.security'); // Render Account Detail Page (General Tab)
     });
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/accounts/create', [AccountController::class, 'createAccount'])->name('account.create');
-        Route::delete('/accounts/delete/{account}/single', [AccountController::class, 'delete_account_single'])->name('account.delete.single');
+        Route::delete('/accounts/delete/{user}/single', [AccountController::class, 'delete_account_single'])->name('account.delete.single');
         Route::delete('/accounts/delete/array', [AccountController::class, 'delete_account_array'])->name('account.delete.array');
+        Route::post('/account/{user}/details/general', [AccountController::class, 'update_account'])->name('account.update.general'); // Render Account Detail Page (General Tab)
     });
 });
 
