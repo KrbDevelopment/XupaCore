@@ -50,6 +50,63 @@
                 </div>
             </div>
         </form>
+        <form class="space-y-8 divide-y divide-gray-200" @submit.prevent="performChangePasswordAttempt(account)">
+            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                <div>
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Security Notifications
+                        </h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                            Here you can send security notifications to the account owner manually.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                        <!-- Send Notifications -->
+                        <div class="w-full">
+                            <div class="container mx-auto flex items-start justify-center">
+                                <div class="w-full">
+                                    <div class="flex flex-col lg:flex-row mx-auto bg-white shadow rounded-lg">
+                                        <div class="w-full lg:w-1/3 px-12 flex flex-col items-center py-10">
+                                            <h2 class="text-gray-800 dark:text-gray-100 text-xl tracking-normal font-medium mb-1">Reset Password</h2>
+                                            <p class="flex text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-3 text-center">
+                                                Email
+                                            </p>
+                                            <p class="text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-8 text-center w-10/12">Send the user an email in which he can reset his password.</p>
+                                            <button type="submit" class="ml-3 inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
+                                                Send Notification
+                                            </button>
+                                        </div>
+                                        <div class="w-full lg:w-1/3 px-12 flex flex-col items-center py-10 border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l border-gray-300">
+                                            <h2 class="text-gray-800 dark:text-gray-100 text-xl tracking-normal font-medium mb-1">Verify Mail</h2>
+                                            <p class="flex text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-3 text-center">
+                                                Email
+                                            </p>
+                                            <p class="text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-8 text-center w-10/12">Send the user an email confirming his email address.</p>
+                                            <button type="submit" class="ml-3 inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
+                                                Send Notification
+                                            </button>
+                                        </div>
+                                        <div class="w-full lg:w-1/3 px-12 flex flex-col items-center py-10 border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l border-gray-300">
+                                            <h2 class="text-gray-800 dark:text-gray-100 text-xl tracking-normal font-medium mb-1">Password Changed</h2>
+                                            <p class="flex text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-3 text-center">
+                                                Email
+                                            </p>
+                                            <p class="text-gray-600 dark:text-gray-100 text-sm tracking-normal font-normal mb-8 text-center w-10/12">Send the user an email stating that his password has been changed.</p>
+                                            <button type="submit" class="ml-3 inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
+                                                Send Notification
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END: Send Notifications -->
+                    </div>
+                </div>
+            </div>
+        </form>
     </Detail>
 </template>
 
