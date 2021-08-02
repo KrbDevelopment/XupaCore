@@ -27,14 +27,61 @@ class AccountController extends Controller
     }
 
     /**
+     * Render Account detail page
+     * @return Response Inertia Render Response
+     */
+    public function renderAccountDetails(User $user): Response
+    {
+        return Inertia::render('Accounts/Detail',  [
+            'account' => $user
+        ]);
+    }
+
+    /**
+     * Render Account detail page (General Tab)
+     * @return Response Inertia Render Response
+     */
+    public function renderAccountGeneralDetails(User $user) : Response
+    {
+        return Inertia::render('Accounts/DetailPages/General',  [
+            'account' => $user
+        ]);
+    }
+
+    /**
+     * Render Account detail page (Security Tab)
+     * @return Response Inertia Render Response
+     */
+    public function renderAccountSecurityDetails(User $user) : Response
+    {
+        return Inertia::render('Accounts/DetailPages/Security',  [
+            'account' => $user
+        ]);
+    }
+
+    public function update_account(Request $request, User $user)
+    {
+        $request->validate([
+            'first_name'=>'required|string|max:255',
+            'last_name'=>'required|string|max:255',
+            'username'=>'required|string|max:255|unique:users,username,' . $user->id,
+            'email'=>'required|string|max:255|unique:users,email,' . $user->id,
+            'biography'=>'nullable|string'
+        ]);
+
+        $user->update($request->all());
+        $user->save();
+
+        return back();
+    }
+
+    /**
      * Delete single user account
-     * @param Request $request
+     * @param User $user
      * @return RedirectResponse
      */
-    public function delete_account_single(Request $request): RedirectResponse
+    public function delete_account_single(User $user): RedirectResponse
     {
-        error_log(print_r($request->account, true));
-        $user = User::findOrFail($request->account);
         $user->delete();
         return back();
     }
