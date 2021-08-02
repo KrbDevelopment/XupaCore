@@ -87,12 +87,12 @@
                                         <MenuItems class="origin-top-right absolute z-30 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <div class="py-1">
                                                 <MenuItem v-slot="{ active }">
-                                                    <Link as="a" :href="route('permissions.render.roles.detail', { role: account.id })" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                                                    <Link as="a" href="" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                                                         Open
                                                     </Link>
                                                 </MenuItem>
                                                 <MenuItem v-slot="{ active }">
-                                                    <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                                                    <div @click="deleteAccount(account.id)" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                                                         Delete
                                                     </div>
                                                 </MenuItem>
@@ -167,6 +167,59 @@ export default {
         getSelectedIds() {
             return this.selected.map((index) => {
                 return this.accounts.data[index].id
+            })
+        },
+        deleteAccount(id) {
+            Inertia.delete(this.route('accounts.requests.account.delete.single', { account: id }), {
+                preserveScroll: true, // Keep scrolling position (freeze position)
+
+                /**
+                 * Successful server response [HTTP Code: 2x]
+                 */
+                onSuccess: () => {
+                    this.$notify(
+                        {
+                            group: 'success',
+                            title: 'Account has been deleted',
+                            text: 'You have successfully deleted the account',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                },
+
+                /**
+                 * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
+                 */
+                onError: (err) => {
+                    console.log(err)
+                    this.$notify(
+                        {
+                            group: 'error',
+                            title: 'An error has occurred',
+                            transitionGroupClasses: {
+                                enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+                                enterActiveClass: 'transform ease-out duration-300 transition',
+                                enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+                                enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+                                leaveActiveClass: 'transition ease-in duration-500',
+                                leaveFromClass: 'opacity-100',
+                                leaveToClass: 'opacity-0',
+                                moveClass: 'transition duration-500'
+                            }
+                        },
+                        4000
+                    )
+                }
             })
         },
         massDeleteAccounts() {

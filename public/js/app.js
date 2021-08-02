@@ -35239,8 +35239,61 @@ __webpack_require__.r(__webpack_exports__);
         return _this2.accounts.data[index].id;
       });
     },
-    massDeleteAccounts: function massDeleteAccounts() {
+    deleteAccount: function deleteAccount(id) {
       var _this3 = this;
+
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.delete(this.route('accounts.requests.account.delete.single', {
+        account: id
+      }), {
+        preserveScroll: true,
+        // Keep scrolling position (freeze position)
+
+        /**
+         * Successful server response [HTTP Code: 2x]
+         */
+        onSuccess: function onSuccess() {
+          _this3.$notify({
+            group: 'success',
+            title: 'Account has been deleted',
+            text: 'You have successfully deleted the account',
+            transitionGroupClasses: {
+              enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+              enterActiveClass: 'transform ease-out duration-300 transition',
+              enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+              enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+              leaveActiveClass: 'transition ease-in duration-500',
+              leaveFromClass: 'opacity-100',
+              leaveToClass: 'opacity-0',
+              moveClass: 'transition duration-500'
+            }
+          }, 4000);
+        },
+
+        /**
+         * Failed server response [HTTP Code: 4x & 5x] Most likely validation error
+         */
+        onError: function onError(err) {
+          console.log(err);
+
+          _this3.$notify({
+            group: 'error',
+            title: 'An error has occurred',
+            transitionGroupClasses: {
+              enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
+              enterActiveClass: 'transform ease-out duration-300 transition',
+              enterFromClass: 'translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4',
+              enterToClass: 'translate-y-0 opacity-100 sm:translate-x-0',
+              leaveActiveClass: 'transition ease-in duration-500',
+              leaveFromClass: 'opacity-100',
+              leaveToClass: 'opacity-0',
+              moveClass: 'transition duration-500'
+            }
+          }, 4000);
+        }
+      });
+    },
+    massDeleteAccounts: function massDeleteAccounts() {
+      var _this4 = this;
 
       var ids = this.getSelectedIds();
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.delete(this.route('accounts.requests.account.delete.array', {
@@ -35253,7 +35306,7 @@ __webpack_require__.r(__webpack_exports__);
          * Successful server response [HTTP Code: 2x]
          */
         onSuccess: function onSuccess() {
-          _this3.$notify({
+          _this4.$notify({
             group: 'success',
             text: "".concat(ids.length, " accounts has been deleted"),
             transitionGroupClasses: {
@@ -35275,7 +35328,7 @@ __webpack_require__.r(__webpack_exports__);
         onError: function onError(err) {
           console.log(err);
 
-          _this3.$notify({
+          _this4.$notify({
             group: 'error',
             title: 'An error has occurred',
             transitionGroupClasses: {
@@ -37836,9 +37889,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                         var active = _ref.active;
                         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
                           as: "a",
-                          href: $options.route('permissions.render.roles.detail', {
-                            role: account.id
-                          }),
+                          href: "",
                           "class": [active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']
                         }, {
                           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -37849,26 +37900,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
                         }, 1032
                         /* PROPS, DYNAMIC_SLOTS */
-                        , ["href", "class"])];
+                        , ["class"])];
+                      }),
+                      _: 1
+                      /* STABLE */
+
+                    }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MenuItem, null, {
+                      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
+                        var active = _ref2.active;
+                        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+                          onClick: function onClick($event) {
+                            return $options.deleteAccount(account.id);
+                          },
+                          "class": [active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']
+                        }, " Delete ", 10
+                        /* CLASS, PROPS */
+                        , ["onClick"])];
                       }),
                       _: 2
                       /* DYNAMIC */
 
                     }, 1024
                     /* DYNAMIC_SLOTS */
-                    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_MenuItem, null, {
-                      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
-                        var active = _ref2.active;
-                        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-                          "class": [active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']
-                        }, " Delete ", 2
-                        /* CLASS */
-                        )];
-                      }),
-                      _: 1
-                      /* STABLE */
-
-                    })])];
+                    )])];
                   }),
                   _: 2
                   /* DYNAMIC */
