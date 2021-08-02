@@ -1,100 +1,49 @@
 <template>
     <Detail :account="this.account">
-        <form class="space-y-8 divide-y divide-gray-200" @submit.prevent="performUpdateAttempt(account)">
+        <form class="space-y-8 divide-y divide-gray-200" @submit.prevent="performChangePasswordAttempt(account)">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                     <div>
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            General
+                            Security
                         </h3>
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                            This page will show you the current preferences of the Administrator role
+                            This page shows you the current security settings of the account
                         </p>
                     </div>
 
                     <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-                        <div class="flex flex-row justify-center items-center space-x-3 w-full">
-                            <!-- Firstname field -->
-                            <div class="content-center w-full">
-                                <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
-                                    Firstname
-                                </label>
-                                <div class="relative mt-1">
-                                    <input
-                                        class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
-                                        type="text" placeholder="Enter your firstname" v-model="first_name">
-                                </div>
-                            </div>
-                            <!-- END: Firstname field -->
-
-                            <!-- Lastname field -->
-                            <div class="content-center w-full">
-                                <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
-                                    Lastname
-                                </label>
-                                <div class="relative mt-1">
-                                    <input
-                                        class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
-                                        type="text" placeholder="Enter your lastname" v-model="last_name">
-                                </div>
-                            </div>
-                            <!-- END: Lastname field -->
-                        </div>
-
-                        <div class="flex flex-row justify-center items-center space-x-3 w-full">
-                            <!-- Username field -->
-                            <div class="content-center w-full">
-                                <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
-                                    Username
-                                </label>
-                                <div class="relative mt-1">
-                                    <input
-                                        class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
-                                        type="text" placeholder="Enter your username" v-model="username">
-                                </div>
-                            </div>
-                            <!-- END: Username field -->
-
-                            <!-- Email field -->
-                            <div class="content-center w-full">
-                                <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
-                                    Email Address
-                                </label>
-                                <div class="relative mt-1">
-                                    <input
-                                        class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
-                                        type="email" placeholder="Enter your email address" v-model="email">
-                                </div>
-                            </div>
-                            <!-- END: Email field -->
-                        </div>
-
-                        <!-- Biography field -->
+                        <!-- New Password field -->
                         <div class="content-center w-full">
-                            <label class="ml-1 text-sm font-bold text-gray-700">
-                                Biography
+                            <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
+                                New Password
                             </label>
                             <div class="relative mt-1">
-                                    <textarea
-                                        class="w-full content-center text-base px-4 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
-                                        type="email"
-                                        placeholder="Write your biography here"
-                                        rows="5"
-                                        cols="30"
-                                        v-model="biography"
-                                    />
+                                <input
+                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
+                                    type="password" placeholder="Enter a new Password" v-model="password">
                             </div>
                         </div>
-                        <!-- END: Biography field -->
+                        <!-- END: New Password field -->
+
+                        <!-- New Password field -->
+                        <div class="content-center w-full">
+                            <label class="ml-1 text-sm font-bold text-gray-700 tracking-wide">
+                                Repeat Password
+                            </label>
+                            <div class="relative mt-1">
+                                <input
+                                    class="w-full content-center text-base px-4 py-2 border-b rounded-xl border-gray-300 focus:border-xupa focus:outline-none focus:ring-0"
+                                    type="password" placeholder="Enter the new Password again" v-model="password_confirmation">
+                            </div>
+                        </div>
+                        <!-- END: New Password field -->
                     </div>
                 </div>
             </div>
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
-                        Cancel
-                    </button>
                     <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
                         Save
                     </button>
@@ -114,12 +63,8 @@ export default {
     data() {
         return {
             // User Credentials
-            first_name: this.$page.props.account.first_name,
-            last_name: this.$page.props.account.last_name,
-            username: this.$page.props.account.username,
-            email: this.$page.props.account.email,
-            biography: this.$page.props.account.biography,
-
+            password: null,
+            password_confirmation: null,
             // Post Login
             validationError: null
         }
@@ -127,19 +72,16 @@ export default {
     methods: {
         route(routeName, data = {}) { return window.route(routeName, data) },
         /**
-         * Perform update attempt for profile form
+         * Perform change password attempt for password form
          */
-        performUpdateAttempt(user) {
+        performChangePasswordAttempt(user) {
             // Clear recent validation errors
             this.validationError = null
 
-            Inertia.post(window.route('accounts.requests.account.update.general', { user: user }), {
+            Inertia.post(window.route('accounts.requests.account.change.password', { user: user }), {
                 // Post Content
-                first_name: this.first_name,
-                last_name: this.last_name,
-                username: this.username,
-                email: this.email,
-                biography: this.biography,
+                password: this.password,
+                password_confirmation: this.password_confirmation,
 
                 // CSRF Token
                 _token: this.$page.props.csrf_token
@@ -156,8 +98,8 @@ export default {
                     this.$notify(
                         {
                             group: 'success',
-                            title: 'Profile updated',
-                            text: 'your profile has been updated',
+                            title: 'Password changed',
+                            text: 'the account password has been changed',
                             transitionGroupClasses: {
                                 enterActiveClassDelayed: 'transform ease-out duration-300 transition delay-300',
                                 enterActiveClass: 'transform ease-out duration-300 transition',
