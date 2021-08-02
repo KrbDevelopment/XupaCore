@@ -28,12 +28,13 @@ class AccountController extends Controller
 
     /**
      * Delete single user account
-     * @param User $user
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function delete_account_single(User $user): RedirectResponse
+    public function delete_account_single(Request $request): RedirectResponse
     {
-        error_log(print_r($user, true));
+        error_log(print_r($request->account, true));
+        $user = User::findOrFail($request->account);
         $user->delete();
         return back();
     }
