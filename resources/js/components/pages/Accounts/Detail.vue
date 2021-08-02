@@ -27,10 +27,10 @@
                         </Link>
 
                         <Link as="a" :href="this.route('accounts.render.account.details.security', account)" class="hover:bg-blue-50 hover:bg-opacity-50 flex p-6 border-b border-blue-gray-200">
-                            <BellIcon class="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400" aria-hidden="true" />
+                            <LockClosedIcon class="flex-shrink-0 -mt-0.5 h-6 w-6 text-blue-gray-400" aria-hidden="true" />
                             <div class="ml-3 text-sm">
-                                <p class="font-medium text-blue-gray-900">Notifications</p>
-                                <p class="mt-1 text-blue-gray-500">Here you can see current members of this role and invite new users</p>
+                                <p class="font-medium text-blue-gray-900">Security</p>
+                                <p class="mt-1 text-blue-gray-500">Here you can see and change the security settings of the account</p>
                             </div>
                         </Link>
                     </div>
@@ -48,7 +48,7 @@
 <script>
 import DashboardLayout from '../Layout/Dashboard'
 import { ChevronLeftIcon } from '@heroicons/vue/solid'
-import { UserIcon, KeyIcon, BellIcon, ViewGridAddIcon } from '@heroicons/vue/outline'
+import { UserIcon, LockClosedIcon } from '@heroicons/vue/outline'
 import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
@@ -58,9 +58,7 @@ export default {
         ChevronLeftIcon,
         Link,
         UserIcon,
-        KeyIcon,
-        BellIcon,
-        ViewGridAddIcon
+        LockClosedIcon
     },
     data() {
         return {}
