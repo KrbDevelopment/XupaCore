@@ -53,10 +53,14 @@ Route::group(['as' => 'accounts.', 'middleware' => 'auth'], function() {
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/accounts/create', [AccountController::class, 'createAccount'])->name('account.create');
-        Route::delete('/accounts/delete/{user}/single', [AccountController::class, 'delete_account_single'])->name('account.delete.single');
-        Route::delete('/accounts/delete/array', [AccountController::class, 'delete_account_array'])->name('account.delete.array');
+        Route::delete('/accounts/delete/{user}/single', [AccountController::class, 'deleteSingleAccount'])->name('account.delete.single');
+        Route::delete('/accounts/delete/array', [AccountController::class, 'deleteAccountArray'])->name('account.delete.array');
         Route::post('/account/{user}/details/general', [AccountController::class, 'updateAccount'])->name('account.update.general'); // Update User informations (General Tab)
         Route::post('/account/{user}/details/security/password', [AccountController::class, 'changePassword'])->name('account.change.password'); // Update User password (Security Tab)
+
+        Route::post('/account/{user}/details/security/notify/password_changed', [AccountController::class, 'sendPasswordChangedNotification'])->name('account.notify.password_changed');
+        Route::post('/account/{user}/details/security/notify/verify_email', [AccountController::class, 'sendVerifyEmailNotification'])->name('account.notify.verify_email');
+        Route::post('/account/{user}/details/security/notify/reset_password', [AccountController::class, 'sendResetPasswordNotification'])->name('account.notify.reset_password');
     });
 });
 
