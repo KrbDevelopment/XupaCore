@@ -91,11 +91,44 @@ class AccountController extends Controller
     }
 
     /**
+     * Send Manually Password Changed Notification
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function sendPasswordChangedNotification(User $user): RedirectResponse
+    {
+        $user->sendChangedPasswordNotification();
+        return back();
+    }
+
+    /**
+     * Send Manually Password Reset Notification
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function sendResetPasswordNotification(User $user): RedirectResponse
+    {
+        $user->sendPasswordResetNotification();
+        return back();
+    }
+
+    /**
+     * Send Manually Email Verification Notification
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function sendVerifyEmailNotification(User $user): RedirectResponse
+    {
+        $user->sendEmailVerificationNotification();
+        return back();
+    }
+
+    /**
      * Delete single user account
      * @param User $user
      * @return RedirectResponse
      */
-    public function delete_account_single(User $user): RedirectResponse
+    public function deleteSingleAccount(User $user): RedirectResponse
     {
         $user->delete();
         return back();
@@ -106,7 +139,7 @@ class AccountController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function delete_account_array(Request $request): RedirectResponse
+    public function deleteAccountArray(Request $request): RedirectResponse
     {
         $request->validate([
            'accounts' => 'required|array',
