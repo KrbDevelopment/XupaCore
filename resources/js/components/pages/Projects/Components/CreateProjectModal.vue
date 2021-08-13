@@ -40,8 +40,10 @@
                                             <div class="bg-white dark:bg-gray-800 rounded-b sm:p-6 p-4">
                                                 <div class="flex items-center">
                                                     <div class="pr-5">
-                                                        <div class="w-12 h-12b-4 lg:mb-0 bg-cover rounded-md mr-2">
-                                                            <img src="https://cdn.discordapp.com/attachments/676421183561793546/875824230984458240/XupaRed.png" alt="" class="rounded h-full w-full overflow-hidden shadow" />
+                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" style="background-image: url(https://cdn.discordapp.com/attachments/676421183561793546/875824230984458240/XupaRed.png)">
+                                                            <div class="transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white">
+                                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="pl-4 border-l border-gray-200">
