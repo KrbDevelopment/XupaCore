@@ -5,7 +5,7 @@
             <!-- Background image starts -->
             <img class="z-0 w-full absolute inset-0 object-cover h-64" :src="titleImage" alt="bg" />
             <!-- Background image ends -->
-            <div class="z-10 relative container px-6 mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between">
+            <div class="relative container px-6 mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between">
                 <div>
                     <p class="flex items-center text-gray-300 text-xs">
                         <span class="cursor-pointer">Xupa</span>
@@ -15,7 +15,7 @@
                     <h4 class="text-2xl font-bold leading-tight text-white">Your Projects</h4>
                 </div>
                 <div class="mt-6 lg:mt-0">
-                    <button class="focus:outline-none transition duration-150 ease-in-out hover:bg-gray-200 border bg-white rounded text-xupa px-8 py-2 text-sm">Create Project</button>
+                    <button class="focus:outline-none transition duration-150 ease-in-out hover:bg-gray-200 border bg-white rounded text-xupa px-8 py-2 text-sm" @click="openCreateProjectModal()">Create Project</button>
                 </div>
             </div>
             <div class="w-full">
@@ -25,10 +25,10 @@
                             <!-- START: PROJECT GRID -->
                             <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-6 gap-8">
                                 <!-- START: PROJECT CARD -->
-                                <div class="max-w-sm shadow">
+                                <div class="max-w-sm bg-white rounded shadow">
                                     <div class="group">
                                         <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://images.pexels.com/photos/7015153/pexels-photo-7015153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)">
-                                            <div class="flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
+                                            <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
                                                 <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
                                             </div>
                                         </div>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </div>
                                             <div class="pl-4 border-l border-gray-200">
-                                                <p class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">www.xupa.com</p>
+                                                <p class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">Xupa Project Manager</p>
                                                 <p class="text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400">World bests Project planner!</p>
                                             </div>
                                         </div>
@@ -51,16 +51,23 @@
                                         <div class="flex items-center pt-5">
                                             <div class="pr-4">
                                                 <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler text-xupa dark:text-xupa-darkest icon-tabler-map-pin" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <circle cx="12" cy="11" r="3" />
-                                                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-                                                    </svg>
+                                                    <LocationMarkerIcon class="text-xupa dark:text-xupa-darkest p-1"></LocationMarkerIcon>
                                                 </div>
                                             </div>
                                             <div>
                                                 <p class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100">KRB-Development HQ</p>
                                                 <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">Bochum, Germany</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center pt-5">
+                                            <div class="pr-4">
+                                                <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
+                                                    <LinkIcon class="text-xupa dark:text-xupa-darkest p-1"></LinkIcon>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100">www.xupa.com</p>
+                                                <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">Official Webpage</p>
                                             </div>
                                         </div>
                                         <div class="pt-8 flex items-center">
@@ -91,18 +98,23 @@
                 </div>
             </div>
         </div>
+        <CreateProjectModal ref="CreateProjectModal" />
     </DashboardLayout>
 </template>
 
 <script>
 import DashboardLayout from '../Layout/Dashboard'
-import { PencilAltIcon } from '@heroicons/vue/outline'
+import { PencilAltIcon, LocationMarkerIcon, LinkIcon } from '@heroicons/vue/outline'
+import CreateProjectModal from './Components/CreateProjectModal'
 
 export default {
     name: 'user-projects',
     components: {
         DashboardLayout,
-        PencilAltIcon
+        CreateProjectModal,
+        PencilAltIcon,
+        LocationMarkerIcon,
+        LinkIcon
     },
     data() {
         return {
@@ -110,7 +122,10 @@ export default {
         }
     },
     methods: {
-        route(routeName, data = {}) { return window.route(routeName, data) }
+        route(routeName, data = {}) { return window.route(routeName, data) },
+        openCreateProjectModal(state = true) {
+            this.$refs.CreateProjectModal.open = state
+        }
     }
 }
 </script>
