@@ -101,16 +101,6 @@ class AccountController extends Controller
         return back();
     }
 
-    /**
-     * Send Manually Password Reset Notification
-     * @param User $user
-     * @return RedirectResponse
-     */
-    public function sendResetPasswordNotification(User $user): RedirectResponse
-    {
-        $user->sendPasswordResetNotification();
-        return back();
-    }
 
     /**
      * Send Manually Email Verification Notification
