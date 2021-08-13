@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Core\UserAssetController;
+use App\Http\Controllers\Projects\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -36,6 +37,19 @@ Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
         Route::post('/profile/notifications', [ProfileController::class, 'updatePreferences'])->name('preferences.change'); // Change users password
         Route::post('/profile/banner', [ProfileController::class, 'updateBanner'])->name('banner.update'); // Change users banner
         Route::post('/profile/profile_image', [ProfileController::class, 'updateProfileImage'])->name('profile_image.update'); // Change users profile image
+    });
+});
+
+// Routes of Projects core
+Route::group(['as' => 'projects.', 'middleware' => 'auth'], function() {
+    // Render Pages
+    Route::group(['as' => 'render.'], function() {
+        Route::get('/projects', [ProjectController::class, 'renderUserProjects'])->name('user.all'); // All user projects
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function() {
+
     });
 });
 
