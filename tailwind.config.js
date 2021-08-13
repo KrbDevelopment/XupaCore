@@ -28,7 +28,9 @@ module.exports = {
     },
     variants: {
         extend: {
-            blur: ['hover']
+            filter: ['hover', 'focus'],
+            brightness: ['hover', 'focus'],
+            blur: ['hover', 'focus']
         }
     },
     plugins: [
