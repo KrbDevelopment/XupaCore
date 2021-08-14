@@ -25,9 +25,14 @@
                             <!-- START: PROJECT GRID -->
                             <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-6 gap-8">
                                 <!-- START: PROJECT CARD -->
-                                <div class="max-w-sm bg-white rounded shadow">
+                                <div class="max-w-sm bg-white rounded shadow" v-for="(project, index) in this.projects.data" v-bind:key="index">
                                     <div class="group">
-                                        <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://images.pexels.com/photos/7015153/pexels-photo-7015153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)">
+                                        <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + project.thumbnail + ')'" v-if="project.thumbnail">
+                                            <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
+                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                            </div>
+                                        </div>
+                                        <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://i.stack.imgur.com/y9DpT.jpg)" v-else>
                                             <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
                                                 <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
                                             </div>
@@ -37,37 +42,49 @@
                                         <div class="flex items-center">
                                             <div class="pr-5">
                                                 <div class="w-12 h-12b-4 lg:mb-0 bg-cover rounded-md mr-2">
-                                                    <img src="https://cdn.discordapp.com/attachments/676421183561793546/875824230984458240/XupaRed.png" alt="" class="rounded h-full w-full overflow-hidden shadow" />
+                                                    <img :src="project.logo ? project.logo : 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg' " alt="" class="rounded h-full w-full overflow-hidden shadow" />
                                                 </div>
                                             </div>
                                             <div class="pl-4 border-l border-gray-200">
-                                                <p class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">Xupa Project Manager</p>
-                                                <p class="text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400">World bests Project planner!</p>
+                                                <p class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
+                                                    {{ project.title }}
+                                                </p>
+                                                <p class="text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400">
+                                                    {{ project.slogan }}
+                                                </p>
                                             </div>
                                         </div>
                                         <p class="mt-5 text-sm text-gray-600 dark:text-gray-400 font-normal">
-                                            The web has witnessed mammoth advances; however a website’s success still depends on just one thing: how users interact with it.
+                                            {{ project.description.substring(0, 120) }}{{ project.description.length > 120 ? '...' : '' }}
                                         </p>
-                                        <div class="flex items-center pt-5">
+                                        <div class="flex items-center pt-5" v-show="project.location_city && project.location_address">
                                             <div class="pr-4">
                                                 <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
                                                     <LocationMarkerIcon class="text-xupa dark:text-xupa-darkest p-1"></LocationMarkerIcon>
                                                 </div>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100">KRB-Development HQ</p>
-                                                <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">Bochum, Germany</p>
+                                                <p class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100">
+                                                    {{ project.location_city }}
+                                                </p>
+                                                <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">
+                                                    {{ project.location_address }}
+                                                </p>
                                             </div>
                                         </div>
-                                        <div class="flex items-center pt-5">
+                                        <div class="flex items-center pt-5" v-show="project.website_link && project.website_title">
                                             <div class="pr-4">
                                                 <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center">
                                                     <LinkIcon class="text-xupa dark:text-xupa-darkest p-1"></LinkIcon>
                                                 </div>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100">www.xupa.com</p>
-                                                <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">Official Webpage</p>
+                                                <a class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100" :href="project.website_link">
+                                                    {{ project.website_title }}
+                                                </a>
+                                                <p class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400">
+                                                    {{ project.website_link }}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="pt-8 flex items-center">
@@ -108,6 +125,7 @@ import { PencilAltIcon, LocationMarkerIcon, LinkIcon } from '@heroicons/vue/outl
 import CreateProjectModal from './Components/CreateProjectModal'
 
 export default {
+    props: ['projects'],
     name: 'user-projects',
     components: {
         DashboardLayout,
@@ -118,6 +136,7 @@ export default {
     },
     data() {
         return {
+            defaultThumbnail: 'https://images.pexels.com/photos/7015153/pexels-photo-7015153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
             titleImage: 'https://tuk-cdn.s3.amazonaws.com/assets/webapp/common/bg_image_lite.png'
         }
     },
