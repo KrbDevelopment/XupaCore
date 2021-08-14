@@ -49,7 +49,7 @@ Route::group(['as' => 'projects.', 'middleware' => 'auth'], function() {
 
     // Requests
     Route::group(['as' => 'requests.'], function() {
-
+        Route::post('/projects/create', [ProjectController::class, 'createProject'])->name('project.create'); // Create a new Project
     });
 });
 
