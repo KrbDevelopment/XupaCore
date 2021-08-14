@@ -7,7 +7,7 @@
                 <div class="fixed inset-y-0 pl-16 max-w-full right-0 flex">
                     <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
                         <div class="w-screen max-w-md">
-                            <form class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl" @submit.prevent="createProject">
+                            <form class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl" @submit.prevent="performCreateProjectAttempt">
                                 <div class="flex-1 h-0 overflow-y-auto">
                                     <div class="py-6 px-4 bg-xupa sm:px-6">
                                         <div class="flex items-center justify-between">
@@ -47,11 +47,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="pl-4 border-l border-gray-200">
-                                                        <input type="text" class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="New Title">
-                                                        <input type="text" class="text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="New Slogan">
+                                                        <input type="text" class="text-lg font-semibold leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="New Title" v-model="project.title">
+                                                        <input type="text" class="text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="New Slogan" v-model="project.slogan">
                                                     </div>
                                                 </div>
-                                                <textarea class="mt-5 text-sm text-gray-600 dark:text-gray-400 font-normal w-full border-0 focus:ring-0 p-0" rows="3">New Description</textarea>
+                                                <textarea class="mt-5 text-sm text-gray-600 dark:text-gray-400 font-normal w-full border-0 focus:ring-0 p-0" rows="3" v-model="project.description"></textarea>
                                                 <!-- START: Location -->
                                                 <div class="flex items-center pt-5">
                                                     <div class="pr-4">
@@ -60,8 +60,8 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <input type="text" class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="Address">
-                                                        <input type="text" class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="City, Country">
+                                                        <input type="text" class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="Address" v-model="project.location_address">
+                                                        <input type="text" class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="City, Country" v-model="project.location_city">
                                                     </div>
                                                 </div>
                                                 <!-- END: Location -->
@@ -73,8 +73,8 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <input type="text" class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="www.your-domain.com">
-                                                        <input type="text" class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="Your Domain Name">
+                                                        <input type="text" class="text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0" placeholder="www.your-domain.com" v-model="project.website_link">
+                                                        <input type="text" class="pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0" placeholder="Your Domain Name" v-model="project.website_title">
                                                     </div>
                                                 </div>
                                                 <!-- START: Website -->
@@ -120,13 +120,14 @@ export default {
     },
     data() {
         return {
-            account: {
-                first_name: null,
-                last_name: null,
-                username: null,
-                email: null,
-                password: null,
-                password_confirmation: null
+            project: {
+                title: null,
+                slogan: null,
+                description: 'New Description',
+                location_address: null,
+                location_city: null,
+                website_link: null,
+                website_title: null
             },
             validationErrors: {}
         }
@@ -142,18 +143,20 @@ export default {
         route(name, options = {}) {
             return window.route(name, options)
         },
-        createProject() {
+        performCreateProjectAttempt() {
             // Clear recent validation errors
             this.validationError = null
 
-            Inertia.post(window.route('accounts.requests.account.create'), {
+            Inertia.post(window.route('projects.requests.project.create'), {
                 // Post Content
-                first_name: this.account.first_name,
-                last_name: this.account.last_name,
-                username: this.account.username,
-                email: this.account.email,
-                password: this.account.password,
-                password_confirmation: this.account.password_confirmation,
+                title: this.project.title,
+                slogan: this.project.slogan,
+                description: this.project.description,
+                location_address: this.project.location_address,
+                location_city: this.project.location_city,
+                website_link: this.project.website_link,
+                website_title: this.project.website_title,
+
 
                 // CSRF Token
                 _token: this.$page.props.csrf_token
