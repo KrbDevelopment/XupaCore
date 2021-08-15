@@ -29,12 +29,12 @@
                                     <div class="group">
                                         <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + this.route('projects.requests.project.thumbnail.get', { project: project.id }) + ')'" v-if="project.thumbnail">
                                             <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
-                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click="openEditProjectModal(project)"/>
                                             </div>
                                         </div>
                                         <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://i.stack.imgur.com/y9DpT.jpg)" v-else>
                                             <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
-                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click="openEditProjectModal(project)"/>
                                             </div>
                                         </div>
                                     </div>
@@ -116,6 +116,7 @@
             </div>
         </div>
         <CreateProjectModal ref="CreateProjectModal" />
+        <EditProjectModal ref="EditProjectModal" />
     </DashboardLayout>
 </template>
 
@@ -123,6 +124,7 @@
 import DashboardLayout from '../Layout/Dashboard'
 import { PencilAltIcon, LocationMarkerIcon, LinkIcon } from '@heroicons/vue/outline'
 import CreateProjectModal from './Components/CreateProjectModal'
+import EditProjectModal from './Components/EditProjectModal'
 
 export default {
     props: ['projects'],
@@ -130,6 +132,7 @@ export default {
     components: {
         DashboardLayout,
         CreateProjectModal,
+        EditProjectModal,
         PencilAltIcon,
         LocationMarkerIcon,
         LinkIcon
@@ -144,6 +147,10 @@ export default {
         route(routeName, data = {}) { return window.route(routeName, data) },
         openCreateProjectModal(state = true) {
             this.$refs.CreateProjectModal.open = state
+        },
+        openEditProjectModal(project, state = true) {
+            this.$refs.EditProjectModal.open = state
+            this.$refs.EditProjectModal.project = project
         }
     }
 }
