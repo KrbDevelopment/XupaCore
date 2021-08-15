@@ -36694,6 +36694,10 @@ __webpack_require__.r(__webpack_exports__);
         title: null,
         slogan: null,
         description: 'New Description',
+        thumbnail: null,
+        thumbnail_preview: 'https://i.stack.imgur.com/y9DpT.jpg',
+        logo: null,
+        logo_preview: 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
         location_address: null,
         location_city: null,
         website_link: null,
@@ -36713,6 +36717,12 @@ __webpack_require__.r(__webpack_exports__);
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return window.route(name, options);
     },
+    chooseThumbnail: function chooseThumbnail() {
+      document.getElementById('uploadThumbnail').click();
+    },
+    chooseLogo: function chooseLogo() {
+      document.getElementById('uploadLogo').click();
+    },
     performCreateProjectAttempt: function performCreateProjectAttempt() {
       var _this = this;
 
@@ -36723,6 +36733,8 @@ __webpack_require__.r(__webpack_exports__);
         title: this.project.title,
         slogan: this.project.slogan,
         description: this.project.description,
+        thumbnail: this.project.thumbnail,
+        logo: this.project.logo,
         location_address: this.project.location_address,
         location_city: this.project.location_city,
         website_link: this.project.website_link,
@@ -36737,7 +36749,10 @@ __webpack_require__.r(__webpack_exports__);
         /**
          * Successful server response [HTTP Code: 2x]
          */
-        onSuccess: function onSuccess() {
+        onSuccess: function onSuccess(response) {
+          _this.project.thumbnail = response;
+          console.log(response);
+
           _this.$notify({
             group: 'success',
             text: 'Project has been created successfully',
@@ -36778,6 +36793,14 @@ __webpack_require__.r(__webpack_exports__);
           }, 4000);
         }
       });
+    },
+    setThumbnailFile: function setThumbnailFile(e) {
+      this.project.thumbnail = e.target.files[0];
+      this.project.thumbnail_preview = URL.createObjectURL(e.target.files[0]);
+    },
+    setLogoFile: function setLogoFile(e) {
+      this.project.logo = e.target.files[0];
+      this.project.logo_preview = URL.createObjectURL(e.target.files[0]);
     }
   }
 });
@@ -40208,58 +40231,46 @@ var _hoisted_13 = {
   "class": "group"
 };
 var _hoisted_14 = {
-  "class": "bg-cover bg-center h-56 rounded-tl rounded-tr",
-  style: {
-    "background-image": "url(https://i.stack.imgur.com/y9DpT.jpg)"
-  }
-};
-var _hoisted_15 = {
   "class": "transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white"
 };
-var _hoisted_16 = {
+var _hoisted_15 = {
   "class": "bg-white dark:bg-gray-800 rounded-b sm:p-6 p-4"
 };
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "flex items-center"
 };
-var _hoisted_18 = {
+var _hoisted_17 = {
   "class": "pr-5"
 };
-var _hoisted_19 = {
-  "class": "w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group",
-  style: {
-    "background-image": "url(https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg)"
-  }
-};
-var _hoisted_20 = {
+var _hoisted_18 = {
   "class": "transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white"
 };
-var _hoisted_21 = {
+var _hoisted_19 = {
   "class": "pl-4 border-l border-gray-200"
 };
-var _hoisted_22 = {
+var _hoisted_20 = {
   "class": "flex items-center pt-5"
+};
+var _hoisted_21 = {
+  "class": "pr-4"
+};
+var _hoisted_22 = {
+  "class": "w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center"
 };
 var _hoisted_23 = {
-  "class": "pr-4"
-};
-var _hoisted_24 = {
-  "class": "w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center"
-};
-var _hoisted_25 = {
   "class": "flex items-center pt-5"
 };
-var _hoisted_26 = {
+var _hoisted_24 = {
   "class": "pr-4"
 };
-var _hoisted_27 = {
+var _hoisted_25 = {
   "class": "w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center"
 };
-var _hoisted_28 = {
+var _hoisted_26 = {
   "class": "flex-shrink-0 px-4 py-4 flex justify-end"
 };
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit",
   "class": "ml-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa"
 }, " Create ", -1
@@ -40294,7 +40305,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "div",
         "static": "",
         "class": "fixed inset-0 overflow-hidden",
-        onClose: _cache[11] || (_cache[11] = function ($event) {
+        onClose: _cache[13] || (_cache[13] = function ($event) {
           return $setup.open = false;
         }),
         open: $setup.open
@@ -40314,7 +40325,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
                 "class": "h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl",
-                onSubmit: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+                onSubmit: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
                   return $options.performCreateProjectAttempt && $options.performCreateProjectAttempt.apply($options, arguments);
                 }, ["prevent"]))
               }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DialogTitle, {
@@ -40335,15 +40346,51 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_XIcon, {
                 "class": "h-6 w-6",
                 "aria-hidden": "true"
-              })])])]), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: PROJECT CARD "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
-                "class": "h-6 w-6 cursor-pointer text-white"
-              })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
-                "class": "h-6 w-6 cursor-pointer text-white"
-              })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+              })])])]), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: PROJECT CARD "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Photo File Input "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+                id: "uploadThumbnail",
+                type: "file",
+                accept: "image/*",
+                onChange: _cache[2] || (_cache[2] = function () {
+                  return $options.setThumbnailFile && $options.setThumbnailFile.apply($options, arguments);
+                }),
+                hidden: ""
+              }, null, 32
+              /* HYDRATE_EVENTS */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Change Photo Button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+                "class": "bg-cover bg-center h-56 rounded-tl rounded-tr",
+                style: 'background-image: url(' + $data.project.thumbnail_preview + ')'
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
+                "class": "h-6 w-6 cursor-pointer text-white",
+                onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.chooseThumbnail, ["prevent"])
+              }, null, 8
+              /* PROPS */
+              , ["onClick"])])], 4
+              /* STYLE */
+              )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Photo File Input "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+                id: "uploadLogo",
+                type: "file",
+                accept: "image/*",
+                onChange: _cache[3] || (_cache[3] = function () {
+                  return $options.setLogoFile && $options.setLogoFile.apply($options, arguments);
+                }),
+                hidden: ""
+              }, null, 32
+              /* HYDRATE_EVENTS */
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Change Photo Button "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+                "class": "w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group",
+                style: 'background-image: url(' + $data.project.logo_preview + ')'
+              }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
+                "class": "h-6 w-6 cursor-pointer text-white",
+                onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.chooseLogo, ["prevent"])
+              }, null, 8
+              /* PROPS */
+              , ["onClick"])])], 4
+              /* STYLE */
+              )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
                 type: "text",
                 "class": "text-lg font-semibold leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0",
                 placeholder: "New Title",
-                "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
                   return $data.project.title = $event;
                 })
               }, null, 512
@@ -40352,7 +40399,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "text",
                 "class": "text-sm leading-4 pt-2 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0",
                 placeholder: "New Slogan",
-                "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+                "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
                   return $data.project.slogan = $event;
                 })
               }, null, 512
@@ -40360,18 +40407,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.slogan]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
                 "class": "mt-5 text-sm text-gray-600 dark:text-gray-400 font-normal w-full border-0 focus:ring-0 p-0",
                 rows: "3",
-                "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+                "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
                   return $data.project.description = $event;
                 })
               }, null, 512
               /* NEED_PATCH */
-              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Location "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LocationMarkerIcon, {
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Location "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LocationMarkerIcon, {
                 "class": "text-xupa dark:text-xupa-darkest p-1"
               })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
                 type: "text",
                 "class": "text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0",
                 placeholder: "Address",
-                "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
                   return $data.project.location_address = $event;
                 })
               }, null, 512
@@ -40380,18 +40427,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "text",
                 "class": "pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0",
                 placeholder: "City, Country",
-                "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+                "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
                   return $data.project.location_city = $event;
                 })
               }, null, 512
               /* NEED_PATCH */
-              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.location_city]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Location "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Website "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LinkIcon, {
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.location_city]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: Location "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Website "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LinkIcon, {
                 "class": "text-xupa dark:text-xupa-darkest p-1"
               })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
                 type: "text",
                 "class": "text-sm font-medium leading-none text-gray-800 dark:text-gray-100 border-0 focus:ring-0 p-0",
                 placeholder: "www.your-domain.com",
-                "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+                "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
                   return $data.project.website_link = $event;
                 })
               }, null, 512
@@ -40400,18 +40447,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 type: "text",
                 "class": "pt-2 text-xs leading-3 text-gray-500 dark:text-gray-400 border-0 focus:ring-0 p-0",
                 placeholder: "Your Domain Name",
-                "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+                "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
                   return $data.project.website_title = $event;
                 })
               }, null, 512
               /* NEED_PATCH */
-              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.website_title]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Website ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: PROJECT CARD ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+              ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.project.website_title]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" START: Website ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END: PROJECT CARD ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
                 type: "button",
                 "class": "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-xupa hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa",
-                onClick: _cache[9] || (_cache[9] = function ($event) {
+                onClick: _cache[11] || (_cache[11] = function ($event) {
                   return $setup.open = false;
                 })
-              }, " Cancel "), _hoisted_29])], 32
+              }, " Cancel "), _hoisted_27])], 32
               /* HYDRATE_EVENTS */
               )])];
             }),
@@ -40628,7 +40675,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [project.thumbnail ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: 0,
           "class": "bg-cover bg-center h-56 rounded-tl rounded-tr",
-          style: 'background-image: url(' + project.thumbnail + ')'
+          style: 'background-image: url(' + _this.route('projects.requests.project.thumbnail.get', {
+            project: project.id
+          }) + ')'
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
           "class": "h-6 w-6 cursor-pointer text-white"
         })])], 4
@@ -40636,7 +40685,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PencilAltIcon, {
           "class": "h-6 w-6 cursor-pointer text-white"
         })])]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          src: project.logo ? project.logo : 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
+          src: project.logo ? _this.route('projects.requests.project.logo.get', {
+            project: project.id
+          }) : 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
           alt: "",
           "class": "rounded h-full w-full overflow-hidden shadow"
         }, null, 8
