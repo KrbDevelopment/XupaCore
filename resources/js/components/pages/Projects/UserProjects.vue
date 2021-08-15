@@ -27,7 +27,7 @@
                                 <!-- START: PROJECT CARD -->
                                 <div class="max-w-sm bg-white rounded shadow" v-for="(project, index) in this.projects.data" v-bind:key="index">
                                     <div class="group">
-                                        <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + project.thumbnail + ')'" v-if="project.thumbnail">
+                                        <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + this.route('projects.requests.project.thumbnail.get', { project: project.id }) + ')'" v-if="project.thumbnail">
                                             <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
                                                 <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
                                             </div>
@@ -42,7 +42,7 @@
                                         <div class="flex items-center">
                                             <div class="pr-5">
                                                 <div class="w-12 h-12b-4 lg:mb-0 bg-cover rounded-md mr-2">
-                                                    <img :src="project.logo ? project.logo : 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg' " alt="" class="rounded h-full w-full overflow-hidden shadow" />
+                                                    <img :src="project.logo ? this.route('projects.requests.project.logo.get', { project: project.id }) : 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg'" alt="" class="rounded h-full w-full overflow-hidden shadow" />
                                                 </div>
                                             </div>
                                             <div class="pl-4 border-l border-gray-200">
