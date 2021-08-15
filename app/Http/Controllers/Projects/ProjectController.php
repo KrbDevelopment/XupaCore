@@ -65,6 +65,53 @@ class ProjectController extends Controller
     }
 
     /**
+     * Update Project
+     * @param Request $request
+     * @param Project $project
+     * @return RedirectResponse
+     */
+    public function updateProject(Request $request, Project $project): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slogan' => 'required|string|max:255',
+            'description' => 'required|string',
+
+            'thumbnail' => 'nullable|image|max:5120',
+            'logo' => 'nullable|image|max:5120',
+
+            'website_title' => 'nullable|string|max:255',
+            'website_link' => 'nullable|string|max:255',
+
+            'location_address' => 'nullable|string|max:255',
+            'location_city' => 'nullable|string|max:255',
+        ]);
+
+
+        $thumbnail = $project->thumbnail;
+        $logo = $project->logo;
+        if ($request->thumbnail) { $thumbnail = $project->setThumbnail($request->thumbnail); }
+        if ($request->logo) { $logo = $project->setLogo($request->logo); }
+
+        $project->update([
+           'title' =>  $request->title,
+           'slogan' =>  $request->slogan,
+           'description' =>  $request->description,
+           'thumbnail' =>  $thumbnail,
+           'logo' => $logo,
+           'website_title' =>  $request->website_title,
+           'website_link' =>  $request->website_link,
+           'location_address' =>  $request->location_address,
+           'location_city' =>  $request->location_city,
+
+        ]);
+
+        $project->save();
+
+        return back();
+    }
+
+    /**
      * Project Thumbnails
      */
 
@@ -100,11 +147,13 @@ class ProjectController extends Controller
     /**
      * Get Project Thumbnail helper
      * @param Project $project
-     * @return StreamedResponse
+     * @return StreamedResponse|null
      */
-    public function getThumbnail(Project $project): StreamedResponse
+    public function getThumbnail(Project $project): ?StreamedResponse
     {
-        return $project->getThumbnail();
+        $thumbnail = $project->getThumbnail();
+        if (!$thumbnail) return null;
+        return $thumbnail;
     }
 
     /**
@@ -143,11 +192,13 @@ class ProjectController extends Controller
     /**
      * Get Project Logo helper
      * @param Project $project
-     * @return StreamedResponse
+     * @return StreamedResponse|null
      */
-    public function getLogo(Project $project): StreamedResponse
+    public function getLogo(Project $project): ?StreamedResponse
     {
-        return $project->getLogo();
+        $logo = $project->getLogo();
+        if (!$logo) return null;
+        return $logo;
     }
 
 }
