@@ -40210,7 +40210,7 @@ var _hoisted_13 = {
 var _hoisted_14 = {
   "class": "bg-cover bg-center h-56 rounded-tl rounded-tr",
   style: {
-    "background-image": "url(https://images.pexels.com/photos/7015153/pexels-photo-7015153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)"
+    "background-image": "url(https://i.stack.imgur.com/y9DpT.jpg)"
   }
 };
 var _hoisted_15 = {
@@ -40228,7 +40228,7 @@ var _hoisted_18 = {
 var _hoisted_19 = {
   "class": "w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group",
   style: {
-    "background-image": "url(https://cdn.discordapp.com/attachments/676421183561793546/875824230984458240/XupaRed.png)"
+    "background-image": "url(https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg)"
   }
 };
 var _hoisted_20 = {

@@ -31,7 +31,7 @@
                                         <!-- START: PROJECT CARD -->
                                         <div class="w-full shadow">
                                             <div class="group">
-                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://images.pexels.com/photos/7015153/pexels-photo-7015153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)">
+                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://i.stack.imgur.com/y9DpT.jpg)">
                                                     <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
                                                         <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
                                                     </div>
@@ -40,7 +40,7 @@
                                             <div class="bg-white dark:bg-gray-800 rounded-b sm:p-6 p-4">
                                                 <div class="flex items-center">
                                                     <div class="pr-5">
-                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" style="background-image: url(https://cdn.discordapp.com/attachments/676421183561793546/875824230984458240/XupaRed.png)">
+                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" style="background-image: url(https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg)">
                                                             <div class="transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white">
                                                                 <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
                                                             </div>
