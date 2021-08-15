@@ -30,19 +30,25 @@
                                     <div class="flex-1 flex flex-col justify-between p-2">
                                         <!-- START: PROJECT CARD -->
                                         <div class="w-full shadow">
+                                            <!-- Photo File Input -->
+                                            <input id="uploadThumbnail" type="file" accept="image/*" @change="setThumbnailFile" hidden>
+                                            <!-- Change Photo Button -->
                                             <div class="group">
-                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" style="background-image: url(https://i.stack.imgur.com/y9DpT.jpg)">
+                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + project.thumbnail_preview + ')'">
                                                     <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
-                                                        <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                                        <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseThumbnail" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="bg-white dark:bg-gray-800 rounded-b sm:p-6 p-4">
                                                 <div class="flex items-center">
+                                                    <!-- Photo File Input -->
+                                                    <input id="uploadLogo" type="file" accept="image/*" @change="setLogoFile" hidden>
+                                                    <!-- Change Photo Button -->
                                                     <div class="pr-5">
-                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" style="background-image: url(https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg)">
+                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" :style="'background-image: url(' + project.logo_preview + ')'">
                                                             <div class="transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white">
-                                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" />
+                                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseLogo" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -124,6 +130,10 @@ export default {
                 title: null,
                 slogan: null,
                 description: 'New Description',
+                thumbnail: null,
+                thumbnail_preview: 'https://i.stack.imgur.com/y9DpT.jpg',
+                logo: null,
+                logo_preview: 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
                 location_address: null,
                 location_city: null,
                 website_link: null,
@@ -143,6 +153,12 @@ export default {
         route(name, options = {}) {
             return window.route(name, options)
         },
+        chooseThumbnail() {
+            document.getElementById('uploadThumbnail').click()
+        },
+        chooseLogo() {
+            document.getElementById('uploadLogo').click()
+        },
         performCreateProjectAttempt() {
             // Clear recent validation errors
             this.validationError = null
@@ -152,6 +168,8 @@ export default {
                 title: this.project.title,
                 slogan: this.project.slogan,
                 description: this.project.description,
+                thumbnail: this.project.thumbnail,
+                logo: this.project.logo,
                 location_address: this.project.location_address,
                 location_city: this.project.location_city,
                 website_link: this.project.website_link,
@@ -168,7 +186,9 @@ export default {
                 /**
                  * Successful server response [HTTP Code: 2x]
                  */
-                onSuccess: () => {
+                onSuccess: (response) => {
+                    this.project.thumbnail = response
+                    console.log(response)
                     this.$notify(
                         {
                             group: 'success',
@@ -214,6 +234,14 @@ export default {
                     )
                 }
             })
+        },
+        setThumbnailFile(e) {
+            this.project.thumbnail = e.target.files[0]
+            this.project.thumbnail_preview = URL.createObjectURL(e.target.files[0])
+        },
+        setLogoFile(e) {
+            this.project.logo = e.target.files[0]
+            this.project.logo_preview = URL.createObjectURL(e.target.files[0])
         }
     }
 }
