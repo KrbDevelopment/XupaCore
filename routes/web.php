@@ -50,6 +50,7 @@ Route::group(['as' => 'projects.', 'middleware' => 'auth'], function() {
     // Requests
     Route::group(['as' => 'requests.'], function() {
         Route::post('/projects/create', [ProjectController::class, 'createProject'])->name('project.create'); // Create a new Project
+        Route::post('/projects/{project}/update', [ProjectController::class, 'updateProject'])->name('project.update'); // Update a existing Project
         Route::post('/projects/thumbnail/update', [ProjectController::class, 'updateThumbnail'])->name('project.thumbnail.update'); // Change project thumbnail
         Route::post('/projects/thumbnail/upload', [ProjectController::class, 'storeThumbnail'])->name('project.thumbnail.upload'); // Upload project thumbnail
         Route::get('/projects/{project}/thumbnail', [ProjectController::class, 'getThumbnail'])->name('project.thumbnail.get');
