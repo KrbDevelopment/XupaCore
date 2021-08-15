@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Core\UserAssetController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -9,6 +8,7 @@ use App\Http\Controllers\TestController;
 // Core
 use App\Http\Controllers\Core\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
+use App\Http\Controllers\Core\UserAssetController;
 
 // Authentication
 use App\Http\Controllers\Core\Authentication\LoginController;
@@ -17,6 +17,9 @@ use App\Http\Controllers\Core\Authentication\ForgotPasswordController;
 use App\Http\Controllers\Core\Authentication\ConfirmPasswordController;
 use App\Http\Controllers\Core\Authentication\ResetPasswordController;
 use App\Http\Controllers\Core\Authentication\EmailController;
+
+// Time Tracking
+use App\Http\Controllers\Addon\Timetracker\TrackingController;
 
 Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
 
@@ -95,5 +98,18 @@ Route::group(['as' => 'auth.', 'middleware' => 'guest'], function() {
         Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm'])->name('password.confirm')->withoutMiddleware('guest');
 
         Route::post('/email/verify', [EmailController::class, 'verify'])->name('email.verify')->withoutMiddleware('guest');
+    });
+});
+
+// Routes of time tracking addon
+Route::group(['as' => 'timetracker.', 'prefix' => 'timetracker', 'middleware' => 'auth'], function() {
+    // Render Pages
+    Route::group(['as' => 'render.'], function() {
+        Route::get('/', [TrackingController::class, 'render_index'])->name('index');
+    });
+
+    // Requests
+    Route::group(['as' => 'requests.'], function () {
+
     });
 });
