@@ -16,7 +16,7 @@ use App\Notifications\VerifyEmailNotification;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
