@@ -7,12 +7,12 @@
                 <div class="fixed inset-y-0 pl-16 max-w-full right-0 flex">
                     <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
                         <div class="w-screen max-w-md">
-                            <form class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl" @submit.prevent="performCreateProjectAttempt">
+                            <form class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl" @submit.prevent="performUpdateProjectAttempt">
                                 <div class="flex-1 h-0 overflow-y-auto">
                                     <div class="py-6 px-4 bg-xupa sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <DialogTitle class="text-lg font-semibold text-white">
-                                                Create Project
+                                                Edit Project
                                             </DialogTitle>
                                             <div class="ml-3 h-7 flex items-center">
                                                 <button type="button" class="bg-xupa rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="open = false">
@@ -23,7 +23,7 @@
                                         </div>
                                         <div class="mt-1">
                                             <p class="text-sm text-white">
-                                                Please enter the following project properties.
+                                                Here you can make changes to the project.
                                             </p>
                                         </div>
                                     </div>
@@ -34,7 +34,12 @@
                                             <input id="uploadThumbnail" type="file" accept="image/*" @change="setThumbnailFile" hidden>
                                             <!-- Change Photo Button -->
                                             <div class="group">
-                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + project.thumbnail_preview + ')'">
+                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + this.route('projects.requests.project.thumbnail.get', { project: this.project.id }) + ')'" v-if="this.project.thumbnail && this.thumbnail.changed !== true">
+                                                    <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
+                                                        <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseThumbnail" />
+                                                    </div>
+                                                </div>
+                                                <div class="bg-cover bg-center h-56 rounded-tl rounded-tr" :style="'background-image: url(' + this.thumbnail.preview + ')'" v-else>
                                                     <div class="transition duration-300 flex justify-end group-hover:opacity-100 opacity-0 p-4 bg-opacity-50 bg-black h-56 rounded-tl rounded-tr text-white">
                                                         <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseThumbnail" />
                                                     </div>
@@ -46,7 +51,12 @@
                                                     <input id="uploadLogo" type="file" accept="image/*" @change="setLogoFile" hidden>
                                                     <!-- Change Photo Button -->
                                                     <div class="pr-5">
-                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" :style="'background-image: url(' + project.logo_preview + ')'">
+                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" :style="'background-image: url(' + this.route('projects.requests.project.logo.get', { project: this.project.id }) + ')'" v-if="this.project.logo && this.logo.changed !== true">
+                                                            <div class="transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white">
+                                                                <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseLogo" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-12 h-12 lg:mb-0 bg-cover rounded-md mr-2 group" :style="'background-image: url(' + this.logo.preview + ')'" v-else>
                                                             <div class="transition duration-300 flex justify-center items-center group-hover:opacity-100 w-full h-full rounded-md opacity-0 bg-opacity-50 bg-black text-white">
                                                                 <PencilAltIcon class="h-6 w-6 cursor-pointer text-white" @click.prevent="chooseLogo" />
                                                             </div>
@@ -94,7 +104,7 @@
                                         Cancel
                                     </button>
                                     <button type="submit" class="ml-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
-                                        Create
+                                        Update
                                     </button>
                                 </div>
                             </form>
@@ -126,27 +136,26 @@ export default {
     },
     data() {
         return {
-            project: {
-                title: null,
-                slogan: null,
-                description: 'New Description',
-                thumbnail: null,
-                thumbnail_preview: 'https://i.stack.imgur.com/y9DpT.jpg',
-                logo: null,
-                logo_preview: 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
-                location_address: null,
-                location_city: null,
-                website_link: null,
-                website_title: null
+            thumbnail: {
+                preview: 'https://i.stack.imgur.com/y9DpT.jpg',
+                upload: null,
+                changed: false
+            },
+            logo: {
+                preview: 'https://t4.ftcdn.net/jpg/02/07/87/79/360_F_207877921_BtG6ZKAVvtLyc5GWpBNEIlIxsffTtWkv.jpg',
+                upload: null,
+                changed: false
             },
             validationErrors: {}
         }
     },
     setup() {
         const open = ref(false)
+        const project = ref({})
 
         return {
-            open
+            open,
+            project
         }
     },
     methods: {
@@ -159,22 +168,21 @@ export default {
         chooseLogo() {
             document.getElementById('uploadLogo').click()
         },
-        performCreateProjectAttempt() {
+        performUpdateProjectAttempt() {
             // Clear recent validation errors
             this.validationError = null
 
-            Inertia.post(window.route('projects.requests.project.create'), {
+            Inertia.post(window.route('projects.requests.project.update', this.project), {
                 // Post Content
                 title: this.project.title,
                 slogan: this.project.slogan,
                 description: this.project.description,
-                thumbnail: this.project.thumbnail,
-                logo: this.project.logo,
+                thumbnail: this.thumbnail.upload,
+                logo: this.logo.upload,
                 location_address: this.project.location_address,
                 location_city: this.project.location_city,
                 website_link: this.project.website_link,
                 website_title: this.project.website_title,
-
 
                 // CSRF Token
                 _token: this.$page.props.csrf_token
@@ -187,8 +195,6 @@ export default {
                  * Successful server response [HTTP Code: 2x]
                  */
                 onSuccess: (response) => {
-                    this.project.thumbnail = response
-                    console.log(response)
                     this.$notify(
                         {
                             group: 'success',
@@ -236,12 +242,16 @@ export default {
             })
         },
         setThumbnailFile(e) {
-            this.project.thumbnail = e.target.files[0]
-            this.project.thumbnail_preview = URL.createObjectURL(e.target.files[0])
+            this.thumbnail.upload = e.target.files[0]
+            this.thumbnail.preview = URL.createObjectURL(e.target.files[0])
+            this.project.thumbnail = URL.createObjectURL(e.target.files[0])
+            this.thumbnail.changed = true
         },
         setLogoFile(e) {
-            this.project.logo = e.target.files[0]
-            this.project.logo_preview = URL.createObjectURL(e.target.files[0])
+            this.logo.upload = e.target.files[0]
+            this.logo.preview = URL.createObjectURL(e.target.files[0])
+            this.project.logo = URL.createObjectURL(e.target.files[0])
+            this.logo.changed = true
         }
     }
 }
