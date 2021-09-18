@@ -15,17 +15,9 @@
                     <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                             <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                Role-Name (& Guard)
+                                Role-Name
                             </label>
-                            <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <div class="max-w-lg flex rounded-md shadow-sm">
-                                    <select id="guard" name="guard" class="mt-1 block w-1/3 pl-3 pr-10 py-2 text-base border-r-0 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-l-md">
-                                        <option selected="">Web-Guard</option>
-                                        <option>API-Guard</option>
-                                    </select>
-                                    <input type="text" name="name" id="name" class="mt-1 block w-2/3 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-r-md" />
-                                </div>
-                            </div>
+                            <input type="text" name="name" id="name" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-xupa focus:border-xupa sm:text-sm rounded-md" />
                         </div>
 
                         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -33,7 +25,7 @@
                                 Description
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <textarea id="about" name="about" rows="3" class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md" />
+                                <textarea id="about" name="about" rows="3" class="max-w-lg shadow-sm block w-full focus:ring-xupa focus:border-xupa sm:text-sm border border-gray-300 rounded-md" />
                                 <p class="mt-2 text-sm text-gray-500">Write a few sentences about the role.</p>
                             </div>
                         </div>
