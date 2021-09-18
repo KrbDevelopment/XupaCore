@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 use Laravel\Socialite\Facades\Socialite;
-use Abraham\TwitterOAuth\TwitterOAuth;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginController extends Controller
