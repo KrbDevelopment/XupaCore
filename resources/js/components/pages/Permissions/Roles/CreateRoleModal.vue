@@ -15,7 +15,7 @@
                                                 New Role
                                             </DialogTitle>
                                             <div class="ml-3 h-7 flex items-center">
-                                                <button type="button" class="bg-xupa rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="open = false">
+                                                <button type="button" class="bg-xupa rounded-md text-white hover:text-white focus:outline-none" @click="open = false">
                                                     <span class="sr-only">Close panel</span>
                                                     <XIcon class="h-6 w-6" aria-hidden="true" />
                                                 </button>
