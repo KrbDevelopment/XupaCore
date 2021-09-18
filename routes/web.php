@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Controllers
-use App\Http\Controllers\TestController;
-
 // Core
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Core\ProfileController;
 use App\Http\Controllers\Core\NotificationController;
 use App\Http\Controllers\Core\PermissionController;
@@ -18,7 +16,7 @@ use App\Http\Controllers\Core\Authentication\ConfirmPasswordController;
 use App\Http\Controllers\Core\Authentication\ResetPasswordController;
 use App\Http\Controllers\Core\Authentication\EmailController;
 
-Route::get('/', [TestController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Routes of Profile core
 Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
