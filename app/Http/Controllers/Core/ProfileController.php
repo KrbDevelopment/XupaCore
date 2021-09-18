@@ -2,8 +2,7 @@
 namespace App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserPreference;
+use App\Models\Core\UserPreference;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
