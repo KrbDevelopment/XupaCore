@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\Role;
+use App\Models\Core\Role;
+use App\Models\Core\Permission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
-use Symfony\Component\HttpKernel\EventListener\ValidateRequestListener;
 
 class PermissionController extends Controller
 {
