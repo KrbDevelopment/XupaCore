@@ -90,7 +90,6 @@ class PermissionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'guard_name' => ['required', 'string', Rule::in(array_keys(config('auth.guards')))],
             'description' => 'nullable|string|max:1500'
         ]);
 
@@ -100,7 +99,18 @@ class PermissionController extends Controller
         return back();
     }
 
-    public function update_role() {}
+    public function update_role(Request $request, Role $role): Response
+    {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:1500'
+        ]);
+
+        $role->update($request->all());
+        $role->save();
+
+        return $this->render_role_details_settings($role);
+    }
 
     /**
      * Delete single role by id
