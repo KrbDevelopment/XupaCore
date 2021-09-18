@@ -48,24 +48,6 @@
                                                     </div>
                                                     <p class="text-sm text-red-700 mt-1 float-right" v-if="this.validationErrors.description">{{ this.validationErrors.description }}</p>
                                                 </div>
-                                                <fieldset>
-                                                    <legend class="text-sm font-medium text-gray-900">
-                                                        Guard <span class="text-xupa">*</span>
-                                                    </legend>
-                                                    <div class="mt-2 space-y-5">
-                                                        <div class="relative flex items-start" v-for="guard in guards" v-bind:key="guard">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input :id="guard" :name="guard" :value="guard" aria-describedby="privacy-public-description" type="radio" class="focus:ring-xupa h-4 w-4 text-xupa border-gray-300" v-model="role.guard_name" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm">
-                                                                <label :for="guard" class="font-medium text-gray-900 capitalize">
-                                                                    {{ guard }}-Guard
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <p class="text-sm text-red-700 mt-1 float-right" v-if="this.validationErrors.guard_name">{{ this.validationErrors.guard_name }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +114,6 @@ const team = [
 ]
 
 export default {
-    props: ['guards'],
     components: {
         Dialog,
         DialogOverlay,
@@ -146,7 +127,6 @@ export default {
             role: {
                 name: '',
                 description: '',
-                guard_name: ''
             },
             validationErrors: {}
         }

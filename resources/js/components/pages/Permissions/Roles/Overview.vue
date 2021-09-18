@@ -54,7 +54,6 @@
                             </th>
                             <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">ID</th>
                             <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">Name</th>
-                            <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">Guard</th>
                             <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">Description</th>
                             <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">Permission</th>
                             <th class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4">Date</th>
@@ -68,7 +67,6 @@
                             </td>
                             <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">#R{{ role.id }}</td>
                             <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">{{ role.name }}</td>
-                            <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">{{ role.guard_name }}</td>
                             <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">{{ role.description?.substr(0, 150) }}...</td>
                             <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">{{ role.permissions_count }}</td>
                             <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">{{ formatDate(role.created_at) }}</td>
@@ -109,7 +107,7 @@
             </div>
         </div>
 
-        <CreateRoleModal ref="CreateRoleModal" :guards="guards" />
+        <CreateRoleModal ref="CreateRoleModal" />
     </DashboardLayout>
 </template>
 
@@ -122,7 +120,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
-    props: ['roles', 'guards'],
+    props: ['roles'],
     components: {
         CreateRoleModal,
         DashboardLayout,

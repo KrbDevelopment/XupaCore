@@ -20,7 +20,6 @@ class PermissionController extends Controller
     {
         return Inertia::render('Permissions/Roles/Overview', [
             'roles' => Role::withCount('permissions')->paginate(15),
-            'guards' => array_keys(config('auth.guards'))
         ]);
     }
 
