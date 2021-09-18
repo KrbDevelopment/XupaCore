@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Core\UserPreference;
 use App\Notifications\ResetPasswordNotification;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Traits\HasPermissions;
-use Spatie\Permission\Traits\HasRoles;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Notifications\VerifyEmailNotification;
 
