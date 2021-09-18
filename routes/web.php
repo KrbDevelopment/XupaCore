@@ -22,6 +22,13 @@ Route::get('/', [TestController::class, 'index'])->name('home')->middleware('aut
 
 // Routes of Profile core
 Route::group(['as' => 'profile.', 'middleware' => 'auth'], function() {
+    // Alias
+    Route::group(['as' => 'alias.'], function() {
+        Route::get('/profile', function() {
+            return redirect(route('profile.render.general'));
+        });
+    });
+
     // Render Pages
     Route::group(['as' => 'render.'], function() {
         Route::get('/profile/general', [ProfileController::class, 'renderProfileGeneral'])->name('general'); // General Profile Page
