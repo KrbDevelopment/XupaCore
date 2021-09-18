@@ -12,7 +12,7 @@
                                     <div class="py-6 px-4 bg-xupa sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <DialogTitle class="text-lg font-semibold text-white">
-                                                New Project
+                                                New Role
                                             </DialogTitle>
                                             <div class="ml-3 h-7 flex items-center">
                                                 <button type="button" class="bg-xupa rounded-md text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="open = false">
@@ -23,7 +23,7 @@
                                         </div>
                                         <div class="mt-1">
                                             <p class="text-sm text-white">
-                                                Get started by filling in the information below to create your new project.
+                                                Simply create a new group of users with defined privileges.
                                             </p>
                                         </div>
                                     </div>
