@@ -25,13 +25,10 @@
 
 <script>
 import DashboardLayout from '../../Layout/Dashboard'
-import { MailIcon, PhoneIcon } from '@heroicons/vue/solid'
 
 export default {
     components: {
-        DashboardLayout,
-        MailIcon,
-        PhoneIcon
+        DashboardLayout
     },
     setup() {
         const timetrackers = []
