@@ -24,6 +24,17 @@ class ProjectController extends Controller
     }
 
     /**
+     * Render Project detail page
+     * @return Response Inertia Render Response
+     */
+    public function renderProject(Project $project): Response
+    {
+        return Inertia::render('Projects/Project', [
+            'project' => $project
+        ]);
+    }
+
+    /**
      * Create Project
      * @param Request $request
      * @return RedirectResponse
