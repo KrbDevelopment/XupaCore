@@ -4,14 +4,11 @@
             <div class="relative pb-5 border-b border-gray-200 sm:pb-0">
                 <div class="md:flex md:items-center md:justify-between">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Timetracker Title
+                        Xupa Projectplanning software
                     </h3>
                     <div class="mt-3 flex md:mt-0 md:absolute md:top-3 md:right-0">
                         <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
-                            Back
-                        </button>
-                        <button type="button" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-xupa hover:bg-xupa-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-xupa">
-                            Start Session
+                            Go Back
                         </button>
                     </div>
                 </div>
@@ -32,17 +29,86 @@
                 </div>
             </div>
             <div class="flex flex-col lg:flex-row gap-8 py-5">
-                <div class="w-9/12 flex flex-col gap-y-8">
+                <div class="w-full lg:w-9/12 flex flex-col gap-y-8">
                     <div class="bg-white p-10 rounded-lg">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Session Title
-                        </h3>
-                        <p class="mt-1 text-sm text-gray-500">
-                            Session short description
-                        </p>
+                        <div class="px-4 py-2 sm:px-6">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                Current Session
+                            </h3>
+                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                Overview & Tasks
+                            </p>
+                        </div>
+                        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Title
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        Timetracker Frontend
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Related Project
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        Xupa Projectplanning software
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Started at
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        23:10, Sep 19 2021
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Time target
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        23:30, Sep 19 2021
+                                    </dd>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Short description
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-lg">
+                        <fieldset>
+                            <legend class="text-lg font-medium text-gray-900 mx-4">Tasks</legend>
+                            <div class="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
+                                <div v-for="(task, taskIdx) in tasks" :key="taskIdx" class="relative flex items-start py-4 mx-4">
+                                    <div class="min-w-0 flex-1 text-sm">
+                                        <label :for="`person-${task.id}`" class="font-medium text-gray-700 select-none cursor-pointer">{{ task.title }}</label>
+                                    </div>
+                                    <div class="ml-3 flex items-center h-5">
+                                        <input :id="`person-${task.id}`" :name="`task-${task.id}`" type="checkbox" class="cursor-pointer focus:ring-xupa h-4 w-4 text-xupa-dark border-gray-300 rounded" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-gray-900 pt-5">
+                                <div>
+                                    0/{{ tasks.length }} Tasks
+                                </div>
+                                <div>
+                                    0%
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
-                <div class="w-3/12 flex flex-col gap-y-8">
+                <div class="w-full lg:w-3/12 flex flex-col gap-y-8">
                     <div class="bg-white p-10 rounded-lg">
                         <div class="flex justify-between">
                             <h3 class="text-lg leading-6 font-medium text-gray-600">
@@ -164,6 +230,13 @@ const timeline = [
         iconBackground: 'bg-green-500'
     }
 ]
+const tasks = [
+    { id: 1, title: 'Layout management' },
+    { id: 2, title: 'Finish Mockups' },
+    { id: 3, title: 'Fix Responsive design' },
+    { id: 4, title: 'Add placeholder content' },
+    { id: 5, title: 'Write documentation' }
+]
 
 export default {
     name: 'Single',
@@ -175,6 +248,7 @@ export default {
     setup() {
         return {
             timeline,
+            tasks,
             tabs
         }
     }
