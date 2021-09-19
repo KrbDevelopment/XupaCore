@@ -11,4 +11,7 @@ class TrackingController extends Controller
     public function render_index() {
         return Inertia::render('Addon/Timetracker/Overview');
     }
+    public function render_single() {
+        return Inertia::render('Addon/Timetracker/Single');
+    }
 }
