@@ -106,6 +106,7 @@ Route::group(['as' => 'timetracker.', 'prefix' => 'timetracker', 'middleware' =>
     // Render Pages
     Route::group(['as' => 'render.'], function() {
         Route::get('/', [TrackingController::class, 'render_index'])->name('index');
+        Route::get('/{id}', [TrackingController::class, 'render_single'])->name('single');
     });
 
     // Requests
