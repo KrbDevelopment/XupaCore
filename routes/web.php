@@ -45,6 +45,7 @@ Route::group(['as' => 'projects.', 'middleware' => 'auth'], function() {
     // Render Pages
     Route::group(['as' => 'render.'], function() {
         Route::get('/projects', [ProjectController::class, 'renderUserProjects'])->name('user.all'); // All user projects
+        Route::get('/project/{project}', [ProjectController::class, 'renderProject'])->name('project'); // Single projects
     });
 
     // Requests
