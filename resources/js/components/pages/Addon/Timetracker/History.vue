@@ -33,10 +33,10 @@
                     <div class="bg-white p-10 rounded-lg">
                         <div class="px-4 py-2 sm:px-6">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Current Session
+                                Session Histories
                             </h3>
                             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                Overview & Tasks
+                                Session management & overview
                             </p>
                         </div>
                     </div>
