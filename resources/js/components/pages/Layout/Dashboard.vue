@@ -193,7 +193,7 @@ import moment from 'moment'
 import Notifications from '../../global/Notifications'
 
 const sidebarNavigation = [
-    { name: 'Time-Tracker', href: 'timetracker.render.index', icon: ClockIcon }
+    { name: 'Time-Tracker', href: 'timetracker', icon: ClockIcon }
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
